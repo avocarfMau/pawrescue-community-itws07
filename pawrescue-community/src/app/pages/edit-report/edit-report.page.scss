@@ -1,0 +1,1870 @@
+/* =====================================
+
+   PAGE BACKGROUND
+
+   ===================================== */
+
+ion-content {
+
+  --background: #f5f9f6;
+
+}
+
+.page-container {
+
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  padding: 24px 18px 80px;
+
+}
+
+/* =====================================
+
+   PAGE HEADER
+
+   ===================================== */
+
+.page-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+
+  h1 {
+
+    font-size: 23px;
+
+    color: #213d2d;
+
+    font-weight: 750;
+
+    margin: 0 0 5px;
+
+  }
+
+  p {
+
+    color: #829087;
+
+    font-size: 12px;
+
+    margin: 0;
+
+  }
+
+}
+
+.back-button {
+
+  width: 42px;
+
+  height: 42px;
+
+  flex-shrink: 0;
+
+  background: white;
+
+  border: none;
+
+  border-radius: 12px;
+
+  color: #267b4e;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  ion-icon {
+
+    font-size: 23px;
+
+  }
+
+  &:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+  }
+
+}
+
+/* =====================================
+
+   INFORMATION CARD
+
+   ===================================== */
+
+.info-card {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  background: #e2f4e9;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  margin-bottom: 25px;
+
+  ion-icon {
+
+    font-size: 35px;
+
+    color: #268554;
+
+    flex-shrink: 0;
+
+  }
+
+  h2 {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #236b47;
+
+    margin: 0 0 6px;
+
+  }
+
+  p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #567b65;
+
+    line-height: 1.6;
+
+  }
+
+}
+
+/* =====================================
+
+   REPORT FORM
+
+   ===================================== */
+
+form {
+
+  background: white;
+
+  padding: 22px 18px;
+
+  border-radius: 18px;
+
+  box-shadow: 0 3px 14px rgba(20, 70, 40, 0.05);
+
+}
+
+.form-group {
+
+  margin-bottom: 20px;
+
+  label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 13px;
+
+    color: #334c3c;
+
+    font-weight: 600;
+
+  }
+
+  label span {
+
+    color: #d93025;
+
+  }
+
+  input:not([type="file"]),
+
+  select,
+
+  textarea {
+
+    display: block;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 14px;
+
+    border: 1px solid #dce7df;
+
+    border-radius: 11px;
+
+    background: #fbfdfb;
+
+    color: #263c30;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+  }
+
+  input:focus,
+
+  select:focus,
+
+  textarea:focus {
+
+    border-color: #268554;
+
+    box-shadow: 0 0 0 3px rgba(38, 133, 84, 0.10);
+
+  }
+
+  textarea {
+
+    resize: vertical;
+
+    line-height: 1.6;
+
+  }
+
+  small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    color: #839087;
+
+    line-height: 1.5;
+
+  }
+
+}
+
+/* =====================================
+
+   GPS AND LOCATION SECTION
+
+   ===================================== */
+
+.location-section {
+
+  padding: 18px 14px;
+
+  background: #f7fbf8;
+
+  border: 1px solid #dcebe0;
+
+  border-radius: 16px;
+
+}
+
+.location-description {
+
+  margin: 0 0 16px;
+
+  color: #698073;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+}
+
+.location-actions {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+
+}
+
+.location-action-button {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  min-height: 48px;
+
+  padding: 10px;
+
+  border: 1px solid #b9d9c6;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #268554;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  ion-icon {
+
+    flex-shrink: 0;
+
+    font-size: 19px;
+
+  }
+
+  ion-spinner {
+
+    flex-shrink: 0;
+
+    width: 18px;
+
+    height: 18px;
+
+    color: currentColor;
+
+  }
+
+  &:active {
+
+    background: #e8f5ed;
+
+  }
+
+  &:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+  }
+
+}
+
+.current-location-button {
+
+  background: #268554;
+
+  border-color: #268554;
+
+  color: #ffffff;
+
+  &:active {
+
+    background: #207448;
+
+  }
+
+}
+
+.map-toggle-button {
+
+  background: #ffffff;
+
+  color: #268554;
+
+}
+
+/* =====================================
+
+   LOCATION MESSAGES
+
+   ===================================== */
+
+.location-message {
+
+  margin: 12px 0;
+
+  padding: 11px 12px;
+
+  background: #e8f7ed;
+
+  border: 1px solid #c6e7d1;
+
+  border-radius: 10px;
+
+  color: #236b47;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+}
+
+/* =====================================
+
+   INTERACTIVE LEAFLET MAP
+
+   ===================================== */
+
+.location-map-wrapper {
+
+  width: 100%;
+
+  margin-top: 15px;
+
+  overflow: hidden;
+
+  border: 1px solid #d6e5db;
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+}
+
+.location-map-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 12px 14px;
+
+  background: #eaf6ef;
+
+  color: #236b47;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+  }
+
+  ion-icon {
+
+    font-size: 17px;
+
+  }
+
+}
+
+.location-map {
+
+  display: block;
+
+  width: 100%;
+
+  height: 320px;
+
+  min-height: 320px;
+
+  background: #e6eee9;
+
+  /**
+
+   Keep the map below Ionic overlays
+
+   but allow Leaflet's internal layers
+
+   to work correctly.
+
+   */
+
+  position: relative;
+
+  z-index: 0;
+
+}
+
+   /* Leaflet map buttons */
+
+.location-map-wrapper {
+
+  .leaflet-container {
+
+    font-family: inherit;
+
+  }
+
+  .leaflet-control-zoom a {
+
+    color: #268554;
+
+  }
+
+}
+
+.map-help-text {
+
+  margin: 0;
+
+  padding: 12px 14px;
+
+  color: #748379;
+
+  background: #ffffff;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+
+}
+
+/* =====================================
+
+   SELECTED LOCATION CARD
+
+   ===================================== */
+
+.selected-location-card {
+
+  margin-top: 15px;
+
+  padding: 14px;
+
+  background: #eaf7ee;
+
+  border: 1px solid #cae8d4;
+
+  border-radius: 12px;
+
+}
+
+.selected-location-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 12px;
+
+  color: #236b47;
+
+  font-size: 13px;
+
+  ion-icon {
+
+    color: #268554;
+
+    font-size: 20px;
+
+  }
+
+}
+
+.coordinate-details {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+
+  border-radius: 9px;
+
+  span {
+
+    font-size: 12px;
+
+    color: #506b59;
+
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+
+  }
+
+}
+
+.clear-location-button {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  width: 100%;
+
+  min-height: 40px;
+
+  margin-top: 12px;
+
+  padding: 10px;
+
+  background: #fff0f0;
+
+  color: #c43838;
+
+  border: 1px solid #f3d6d6;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  ion-icon {
+
+    font-size: 17px;
+
+  }
+
+  &:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+  }
+
+}
+
+/* =====================================
+
+   PET PHOTO UPLOAD
+
+   ===================================== */
+
+.photo-upload-container {
+
+  width: 100%;
+
+  position: relative;
+
+}
+
+.photo-upload-label {
+
+  display: flex !important;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  width: 100%;
+
+  min-height: 110px;
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  margin-bottom: 0 !important;
+
+  border: 2px dashed #a5d5b8;
+
+  border-radius: 15px;
+
+  background: #f2faf5;
+
+  color: #268554 !important;
+
+  font-size: 14px !important;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+
+    background 0.2s ease,
+
+    border-color 0.2s ease;
+
+  ion-icon {
+
+    font-size: 28px;
+
+    flex-shrink: 0;
+
+  }
+
+  &:hover {
+
+    background: #e6f5ec;
+
+    border-color: #268554;
+
+  }
+
+}
+
+   /* Keep the file input visually hidden */
+
+.photo-file-input {
+
+  position: absolute;
+
+  width: 1px;
+
+  height: 1px;
+
+  padding: 0;
+
+  margin: 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+}
+
+.photo-upload-container:focus-within .photo-upload-label {
+
+  outline: 2px solid #268554;
+
+  outline-offset: 3px;
+
+}
+
+.photo-upload-container:has(input:disabled) .photo-upload-label {
+
+  opacity: 0.5;
+
+  pointer-events: none;
+
+  cursor: not-allowed;
+
+}
+
+/* =====================================
+
+   PHOTO PREVIEW - NO CROPPING
+
+   ===================================== */
+
+.photo-preview {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: 16px;
+
+  padding: 12px;
+
+  background: #f7faf8;
+
+  border: 1px solid #dce7df;
+
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 420px;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    background: #eaf0ec;
+
+    border-radius: 11px;
+
+  }
+
+}
+
+/* =====================================
+
+   REMOVE PHOTO BUTTON
+
+   ===================================== */
+
+.remove-photo {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  width: 100%;
+
+  min-height: 42px;
+
+  margin-top: 12px;
+
+  padding: 10px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #ffeded;
+
+  color: #c43838;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  ion-icon {
+
+    font-size: 20px;
+
+  }
+
+  &:active {
+
+    background: #ffe0e0;
+
+  }
+
+  &:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+  }
+
+}
+
+/* =====================================
+
+   SUBMIT BUTTON
+
+   ===================================== */
+
+ion-button[type="submit"],
+
+.success-card ion-button {
+
+  --background: #268554;
+
+  --background-hover: #207448;
+
+  --border-radius: 12px;
+
+  height: 48px;
+
+  margin-top: 20px;
+
+  font-weight: 600;
+
+  text-transform: none;
+
+}
+
+ion-button[type="submit"] {
+
+  --box-shadow: none;
+
+}
+
+ion-button[disabled] {
+
+  opacity: 0.65;
+
+}
+
+/* =====================================
+
+   ERROR MESSAGES
+
+   ===================================== */
+
+.error-message {
+
+  color: #d93025;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  margin: 15px 0;
+
+}
+
+/* =====================================
+
+   SUCCESS SCREEN
+
+   ===================================== */
+
+.success-card {
+
+  padding: 35px 22px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 3px 14px rgba(20, 70, 40, 0.05);
+
+  > ion-icon {
+
+    font-size: 65px;
+
+    color: #268554;
+
+  }
+
+  h2 {
+
+    color: #236b47;
+
+    font-size: 23px;
+
+    margin-top: 16px;
+
+  }
+
+  p {
+
+    font-size: 14px;
+
+    color: #667b6d;
+
+    line-height: 1.6;
+
+  }
+
+  .report-number {
+
+    font-weight: 700;
+
+    color: #236b47;
+
+  }
+
+}
+
+/* =====================================
+
+   PHOTO UPLOAD PROGRESS
+
+   ===================================== */
+
+.upload-status {
+
+  margin: 22px 0;
+
+  padding: 16px;
+
+  background: #f0faf4;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  ion-spinner {
+
+    width: 28px;
+
+    height: 28px;
+
+    color: #268554;
+
+  }
+
+  p {
+
+    margin: 10px 0 0;
+
+    color: #268554;
+
+    font-size: 13px;
+
+  }
+
+}
+
+/* =====================================
+
+   PHOTO UPLOAD SUCCESS
+
+   ===================================== */
+
+.photo-success {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 16px;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  background: #e8f7ed;
+
+  ion-icon {
+
+    font-size: 22px;
+
+    color: #268554;
+
+    flex-shrink: 0;
+
+  }
+
+  p {
+
+    margin: 0;
+
+    color: #268554;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+  }
+
+}
+
+/* =====================================
+
+   PHOTO UPLOAD ERROR AND RETRY
+
+   ===================================== */
+
+.photo-upload-error {
+
+  margin: 18px 0;
+
+  padding: 15px;
+
+  background: #fff2f2;
+
+  border: 1px solid #f8d2d2;
+
+  border-radius: 12px;
+
+  p {
+
+    color: #c43838;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+  }
+
+  small {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: #8b6666;
+
+  }
+
+  ion-button {
+
+    --background: transparent;
+
+    --color: #c43838;
+
+    --border-color: #c43838;
+
+    --border-radius: 10px;
+
+    margin-top: 12px;
+
+    height: 42px;
+
+  }
+
+}
+
+/* =====================================
+
+   RESPONSIVE MOBILE LAYOUT
+
+   ===================================== */
+
+@media (max-width: 400px) {
+
+  .page-container {
+
+    padding: 18px 14px 70px;
+
+  }
+
+  .page-header h1 {
+
+    font-size: 21px;
+
+  }
+
+  form {
+
+    padding: 18px 14px;
+
+  }
+
+  .info-card {
+
+    padding: 16px;
+
+    h2 {
+
+      font-size: 15px;
+
+    }
+
+  }
+
+  .location-section {
+
+    padding: 14px 10px;
+
+  }
+
+  .location-actions {
+
+    gap: 8px;
+
+  }
+
+  .location-action-button {
+
+    padding: 10px 7px;
+
+    font-size: 11px;
+
+  }
+
+  .location-map {
+
+    height: 270px;
+
+    min-height: 270px;
+
+  }
+
+  .photo-upload-label {
+
+    min-height: 95px;
+
+    padding: 16px;
+
+    font-size: 13px !important;
+
+  }
+
+  .photo-preview img {
+
+    max-height: 350px;
+
+  }
+
+  .success-card {
+
+    padding: 28px 18px;
+
+  }
+
+}
+
+/* =====================================
+
+   ACCESSIBILITY
+
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .photo-upload-label {
+
+    transition: none;
+
+  }
+
+}
+
+/* =====================================
+
+   BARANGAY AND LANDMARK LOCATION CARD
+
+   ===================================== */
+
+.location-details-card {
+
+  background: #ffffff;
+
+  border: 1px solid #e2ebe5;
+
+  border-radius: 16px;
+
+  padding: 18px;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 3px 14px rgba(20, 70, 40, 0.035);
+
+  .location-details-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-bottom: 15px;
+
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid #edf1ee;
+
+    > ion-icon {
+
+      font-size: 24px;
+
+      color: #268554;
+
+      flex-shrink: 0;
+
+    }
+
+    h3 {
+
+      margin: 0 0 4px;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      color: #213d2d;
+
+    }
+
+    p {
+
+      margin: 0;
+
+      color: #78887e;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+
+    }
+
+  }
+
+  .form-group {
+
+    margin-bottom: 18px;
+
+    label {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color: #334c3c;
+
+      margin-bottom: 9px;
+
+    }
+
+    label span {
+
+      color: #d93025;
+
+    }
+
+    select,
+
+    textarea {
+
+      width: 100%;
+
+      box-sizing: border-box;
+
+      padding: 13px 14px;
+
+      border: 1px solid #dce7df;
+
+      border-radius: 11px;
+
+      background: #fbfdfb;
+
+      color: #263c30;
+
+      font: inherit;
+
+      font-size: 14px;
+
+      outline: none;
+
+    }
+
+    textarea {
+
+      resize: vertical;
+
+      line-height: 1.6;
+
+      min-height: 76px;
+
+    }
+
+    select:focus,
+
+    textarea:focus {
+
+      border-color: #268554;
+
+      box-shadow: 0 0 0 3px rgba(38, 133, 84, 0.10);
+
+    }
+
+    select:disabled,
+
+    textarea:disabled {
+
+      opacity: 0.6;
+
+    }
+
+    small {
+
+      display: block;
+
+      margin-top: 7px;
+
+      font-size: 11px;
+
+      color: #839087;
+
+      line-height: 1.5;
+
+    }
+
+  }
+
+  .location-select-wrapper {
+
+    position: relative;
+
+    select {
+
+      appearance: none;
+
+      -webkit-appearance: none;
+
+      padding-right: 42px;
+
+      cursor: pointer;
+
+    }
+
+    > ion-icon {
+
+      position: absolute;
+
+      right: 14px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      font-size: 18px;
+
+      color: #698073;
+
+      pointer-events: none;
+
+    }
+
+  }
+
+  .location-reminder {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    background: #f0f8f3;
+
+    border: 1px solid #deede3;
+
+    border-radius: 10px;
+
+    ion-icon {
+
+      font-size: 19px;
+
+      color: #268554;
+
+      flex-shrink: 0;
+
+    }
+
+    p {
+
+      margin: 0;
+
+      font-size: 12px;
+
+      color: #4c6756;
+
+      line-height: 1.6;
+
+    }
+
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .location-details-card {
+
+    padding: 15px 13px;
+
+    .location-details-heading h3 {
+
+      font-size: 15px;
+
+    }
+
+  }
+
+}
+
+
+/* =====================================
+   EDIT REPORT INFORMATION
+===================================== */
+
+.edit-report-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #d7e9df;
+  border-radius: 12px;
+  background: #eff8f2;
+
+  ion-icon {
+    flex-shrink: 0;
+    color: #268554;
+    font-size: 22px;
+  }
+
+  strong {
+    color: #236b47;
+    font-size: 13px;
+  }
+
+  p {
+    margin: 5px 0 0;
+    color: #647b6c;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+/* =====================================
+   LOADING AND ERROR STATES
+===================================== */
+
+.loading-state,
+.error-state {
+  padding: 30px 20px;
+  border: 1px solid #dce7df;
+  border-radius: 18px;
+  background: #ffffff;
+  text-align: center;
+
+  > ion-icon {
+    color: #c43838;
+    font-size: 42px;
+  }
+
+  ion-spinner {
+    width: 30px;
+    height: 30px;
+    color: #268554;
+  }
+
+  h3 {
+    margin: 12px 0 8px;
+    color: #213d2d;
+    font-size: 17px;
+  }
+
+  p {
+    margin: 12px 0;
+    color: #698073;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  ion-button {
+    --background: #268554;
+    --border-radius: 12px;
+    margin-top: 16px;
+  }
+}
+
+/* =====================================
+   EXISTING PET PHOTO NOTICE
+===================================== */
+
+.existing-photo-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #dcebe0;
+  border-radius: 12px;
+  background: #f2faf5;
+
+  ion-icon {
+    flex-shrink: 0;
+    color: #268554;
+    font-size: 20px;
+  }
+
+  p {
+    margin: 0;
+    color: #567b65;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+/* =====================================
+   EDIT REPORT ACTION BUTTONS
+===================================== */
+
+.edit-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+
+  ion-button {
+    min-width: 0;
+    height: 48px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: none;
+    --border-radius: 12px;
+    --box-shadow: none;
+  }
+
+  ion-button[fill="outline"] {
+    --background: transparent;
+    --color: #268554;
+    --border-color: #268554;
+    --border-width: 1px;
+  }
+
+  ion-button[type="submit"] {
+    --background: #268554;
+    --background-hover: #207448;
+  }
+
+  ion-spinner {
+    width: 19px;
+    height: 19px;
+    margin-right: 6px;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 400px) {
+  .edit-actions {
+    gap: 9px;
+
+    ion-button {
+      font-size: 12px;
+    }
+  }
+}
+
+/* =====================================
+   MULTIPLE PHOTO MANAGEMENT - EDIT REPORT
+   ===================================== */
+.photo-management-section {
+  margin: 24px 0;
+  padding: 18px 14px;
+  border: 1px solid #dcebe0;
+  background: #f7fbf8;
+  border-radius: 16px;
+}
+
+.photo-management-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  h3 { margin: 0 0 5px; color: #213d2d; font-size: 16px; }
+  p { margin: 0; color: #698073; font-size: 12px; line-height: 1.5; }
+}
+
+.photo-selection-badge {
+  flex-shrink: 0;
+  border-radius: 20px;
+  padding: 6px 10px;
+  background: #e2f4e9;
+  color: #236b47;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.photo-management-help,
+.edit-photo-hint {
+  display: block;
+  margin: 8px 0 15px;
+  color: #698073;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.edit-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.edit-photo-card {
+  min-width: 0;
+  padding: 8px;
+  background: white;
+  border: 1px solid #dce7df;
+  border-radius: 13px;
+}
+
+.edit-photo-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #edf3ef;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.edit-photo-caption {
+  display: block;
+  margin: 8px 0;
+  color: #4c6756;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.edit-photo-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px;
+  background: #fff0f0;
+  color: #c43838;
+  border: 1px solid #f3d6d6;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  ion-icon { font-size: 17px; }
+  ion-spinner { width: 16px; height: 16px; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.edit-photo-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.edit-photo-picker,
+.edit-photo-camera {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 94px;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 12px 8px;
+  box-sizing: border-box;
+  border: 2px dashed #a5d5b8;
+  border-radius: 12px;
+  background: #f2faf5;
+  color: #268554 !important;
+  font: inherit;
+  font-size: 12px !important;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  ion-icon { font-size: 23px; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.edit-photo-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  &:disabled { cursor: not-allowed; }
+}
+
+.edit-photo-picker:has(input:disabled) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.pending-photo-section {
+  margin-top: 16px;
+  h4 { margin: 0 0 10px; color: #334c3c; font-size: 13px; }
+}
+
+.edit-photo-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 15px 0;
+  padding: 12px;
+  background: #e8f7ed;
+  color: #236b47;
+  border-radius: 10px;
+  font-size: 12px;
+  ion-spinner { width: 20px; height: 20px; }
+}
+
+.edit-photo-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+  ion-button {
+    min-width: 0;
+    height: 45px;
+    margin: 0;
+    font-size: 12px;
+    text-transform: none;
+    --border-radius: 11px;
+  }
+}
+
+@media (min-width: 560px) {
+  .edit-photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 390px) {
+  .edit-photo-grid { gap: 8px; }
+  .edit-photo-image { height: 115px; }
+  .edit-photo-actions { grid-template-columns: 1fr; }
+}

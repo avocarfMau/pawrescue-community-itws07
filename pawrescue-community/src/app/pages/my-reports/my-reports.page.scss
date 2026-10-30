@@ -1,0 +1,1338 @@
+
+/* =====================================
+   PAGE BACKGROUND
+===================================== */
+
+ion-content {
+  --background: #f5f9f6;
+}
+
+.page-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 24px 18px 80px;
+}
+
+/* =====================================
+   PAGE HEADER
+===================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+
+  h1 {
+    font-size: 23px;
+    font-weight: 750;
+    color: #213d2d;
+    margin: 0 0 5px;
+  }
+
+  p {
+    font-size: 12px;
+    color: #829087;
+    margin: 0;
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: white;
+  border: none;
+  border-radius: 12px;
+  color: #267b4e;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 23px;
+  }
+
+  &:active {
+    background: #edf5ef;
+  }
+}
+
+/* =====================================
+   INTRODUCTION BANNER
+===================================== */
+
+.info-banner {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #e2f4e9;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 25px;
+
+  h2 {
+    margin: 0 0 7px;
+    color: #236b47;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: #567b65;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+.banner-icon {
+  color: #268554;
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+/* =====================================
+   REPORT A PET BUTTON
+===================================== */
+
+.report-button {
+  --background: #268554;
+  --background-hover: #207448;
+  --border-radius: 12px;
+  --box-shadow: none;
+  height: 50px;
+  margin-bottom: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* =====================================
+   REPORT FILTERS
+===================================== */
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 26px;
+
+  button {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 8px;
+    border-radius: 12px;
+    border: 1px solid #e0e9e3;
+    background: white;
+    color: #698073;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  button.active {
+    background: #268554;
+    color: white;
+    border-color: #268554;
+  }
+
+  button:focus-visible {
+    outline: 2px solid #268554;
+    outline-offset: 3px;
+  }
+}
+
+/* =====================================
+   SECTION HEADER
+===================================== */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #263c30;
+  }
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: #e8f5ed;
+  color: #268554;
+  font-size: 22px;
+  cursor: pointer;
+
+  &:active {
+    background: #d8eddf;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* =====================================
+   REFRESH INDICATOR
+===================================== */
+
+.refresh-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 15px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #eaf7ee;
+  color: #268554;
+  font-size: 12px;
+  font-weight: 500;
+
+  ion-spinner {
+    width: 17px;
+    height: 17px;
+    color: #268554;
+  }
+}
+
+/* =====================================
+   PET REPORT CARDS
+===================================== */
+
+.report-card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 14px rgba(20, 70, 40, 0.05);
+
+  h3 {
+    font-size: 19px;
+    margin: 12px 0 4px;
+    color: #26372e;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =====================================
+   PET PHOTO - NO CROPPING
+===================================== */
+
+.pet-photo {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #edf4ef;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  &:has(img[style*="display: none"]) {
+    display: none;
+  }
+}
+
+/* =====================================
+   REPORT TYPE AND ANIMAL ICON
+===================================== */
+
+.report-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.animal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #f0f6f1;
+  border-radius: 12px;
+  font-size: 25px;
+  flex-shrink: 0;
+}
+
+.report-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 7px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.report-badge.lost {
+  background: #fff0e7;
+  color: #d87533;
+}
+
+.report-badge.found {
+  background: #e2f4e9;
+  color: #268554;
+}
+
+/* =====================================
+   PET INFORMATION
+===================================== */
+
+.animal-type {
+  font-size: 12px;
+  color: #829087;
+  margin: 0;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #526459;
+  margin: 15px 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================
+   REPORT LOCATION AND DATE
+===================================== */
+
+.report-details {
+  border-top: 1px solid #eef1ee;
+  padding-top: 15px;
+
+  div {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 12px;
+    color: #748379;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+  }
+
+  ion-icon {
+    color: #268554;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  span {
+    line-height: 1.5;
+  }
+}
+
+/* =====================================
+   VIEW LOCATION BUTTON
+===================================== */
+
+.view-location-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 43px;
+  margin: 14px 0 8px;
+  padding: 11px 14px;
+  background: #eaf7ee;
+  color: #268554;
+  border: 1px solid #c6e6d1;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 19px;
+  }
+
+  &:hover {
+    background: #dff1e5;
+  }
+
+  &:active {
+    background: #d3ebdc;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #268554;
+    outline-offset: 3px;
+  }
+}
+
+/* =====================================
+   REPORT FOOTER
+===================================== */
+
+.report-footer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f3f0;
+  font-size: 11px;
+  color: #99a59d;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================
+   LOADING, EMPTY AND ERROR STATES
+===================================== */
+
+.loading-state,
+.empty-state,
+.error-state {
+  text-align: center;
+  padding: 50px 15px;
+  color: #839087;
+
+  ion-icon {
+    font-size: 48px;
+    color: #9dcbb0;
+  }
+
+  ion-spinner {
+    color: #268554;
+    width: 30px;
+    height: 30px;
+  }
+
+  h3 {
+    color: #344d3d;
+    font-size: 17px;
+    margin-top: 14px;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+.error-state {
+  color: #d93025;
+
+  p {
+    color: #d93025;
+  }
+
+  ion-button {
+    --color: #268554;
+    --border-color: #268554;
+    --border-radius: 10px;
+    text-transform: none;
+  }
+}
+
+/* =====================================
+   LOCATION MAP MODAL OVERLAY
+===================================== */
+
+.report-map-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  background: rgba(16, 34, 23, 0.65);
+  backdrop-filter: blur(3px);
+}
+
+/* =====================================
+   MAP MODAL CONTAINER
+===================================== */
+
+.report-map-modal {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 540px;
+  max-height: min(90vh, 780px);
+
+  overflow-y: auto;
+
+  background: #ffffff;
+  border-radius: 20px;
+
+  box-shadow: 0 14px 45px rgba(10, 40, 20, 0.20);
+}
+
+/* =====================================
+   MAP MODAL HEADER
+===================================== */
+
+.report-map-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 20px 20px 12px;
+
+  h2 {
+    color: #213d2d;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 5px;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    color: #829087;
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+.close-map-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+  padding: 0;
+
+  background: #eef5f0;
+  color: #267b4e;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 21px;
+  }
+
+  &:active {
+    background: #deebe2;
+  }
+}
+
+/* =====================================
+   MAP MODAL LOCATION DETAILS
+===================================== */
+
+.report-map-location-details {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  margin: 0 20px 15px;
+  padding: 12px 14px;
+
+  border-radius: 11px;
+  background: #f1f8f3;
+
+  color: #526c59;
+  font-size: 12px;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+
+  ion-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 18px;
+    color: #268554;
+  }
+}
+
+/* =====================================
+   LEAFLET MAP CONTAINER
+===================================== */
+
+.report-map-container {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.report-location-map {
+  display: block;
+
+  width: 100%;
+  height: 340px;
+  min-height: 340px;
+
+  position: relative;
+  z-index: 0;
+
+  border: 1px solid #dce8df;
+  border-radius: 12px;
+
+  background: #e6eee9;
+  overflow: hidden;
+}
+
+/* =====================================
+   MAP INFORMATION
+===================================== */
+
+.report-map-info {
+  padding: 15px 20px 5px;
+
+  p {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #738579;
+  }
+}
+
+.report-map-coordinates {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 12px;
+  background: #f6faf7;
+  border: 1px solid #e4eee6;
+  border-radius: 10px;
+
+  span {
+    font-size: 12px;
+    color: #53695a;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* =====================================
+   CLOSE MAP ACTION BUTTON
+===================================== */
+
+.close-map-action {
+  --background: #268554;
+  --background-hover: #207448;
+  --border-radius: 11px;
+  --box-shadow: none;
+
+  height: 46px;
+  margin: 18px 20px 20px;
+
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* =====================================
+   RESPONSIVE MOBILE LAYOUT
+===================================== */
+
+@media (max-width: 400px) {
+
+  .page-container {
+    padding: 18px 14px 70px;
+  }
+
+  .page-header {
+    gap: 12px;
+
+    h1 {
+      font-size: 21px;
+    }
+
+    p {
+      font-size: 11px;
+    }
+  }
+
+  .info-banner {
+    padding: 16px;
+    gap: 12px;
+
+    h2 {
+      font-size: 15px;
+    }
+  }
+
+  .report-card {
+    padding: 16px;
+
+    h3 {
+      font-size: 18px;
+    }
+  }
+
+  .filter-container {
+    gap: 8px;
+
+    button {
+      font-size: 12px;
+      padding: 11px 6px;
+    }
+  }
+
+  .report-button {
+    font-size: 12px;
+  }
+
+  .report-map-overlay {
+    padding: 10px;
+  }
+
+  .report-map-modal {
+    max-height: 92vh;
+    border-radius: 16px;
+  }
+
+  .report-map-modal-header {
+    padding: 16px 15px 10px;
+
+    h2 {
+      font-size: 17px;
+    }
+  }
+
+  .report-map-location-details {
+    margin: 0 15px 12px;
+  }
+
+  .report-map-container {
+    padding: 0 15px;
+  }
+
+  .report-location-map {
+    height: 280px;
+    min-height: 280px;
+  }
+
+  .report-map-info {
+    padding: 12px 15px 5px;
+  }
+
+  .close-map-action {
+    margin: 15px 15px 18px;
+  }
+}
+
+/* =====================================
+   ACCESSIBILITY
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-container button {
+    transition: none;
+  }
+}
+
+
+/* =====================================
+   MULTIPLE PET PHOTOS - POST GALLERY
+===================================== */
+
+.pet-photo-gallery {
+  width: 100%;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid #e2ebe5;
+  border-radius: 14px;
+  background: #f7fbf8;
+  touch-action: pan-y;
+
+  .pet-photo {
+    position: relative;
+    margin-bottom: 0;
+    border-radius: 0;
+    background: #edf4ef;
+  }
+}
+
+.pet-photo-view-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: 150px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #edf4ef;
+  cursor: zoom-in;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 430px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
+
+.pet-photo-expand {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(16, 34, 23, 0.65);
+  color: #ffffff;
+  pointer-events: none;
+
+  ion-icon {
+    font-size: 18px;
+  }
+}
+
+.pet-photo-counter {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 2;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: rgba(16, 34, 23, 0.72);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+/* =====================================
+   PHOTO PREVIOUS / NEXT BUTTONS
+===================================== */
+
+.pet-photo-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  background: rgba(16, 34, 23, 0.62);
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  ion-icon {
+    font-size: 24px;
+    pointer-events: none;
+  }
+
+  &:active {
+    background: rgba(16, 34, 23, 0.85);
+  }
+}
+
+.pet-photo-prev {
+  left: 10px;
+}
+
+.pet-photo-next {
+  right: 10px;
+}
+
+/* =====================================
+   PHOTO DOT POSITION INDICATORS
+===================================== */
+
+.pet-photo-dots,
+.photo-viewer-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 10px;
+}
+
+.pet-photo-dot,
+.photo-viewer-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #c9d9ce;
+  cursor: pointer;
+
+  &.active {
+    width: 20px;
+    border-radius: 20px;
+    background: #268554;
+  }
+}
+
+/* =====================================
+   FULL-SIZE PHOTO VIEWER OVERLAY
+===================================== */
+
+.photo-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: max(12px, env(safe-area-inset-top)) 14px
+    max(12px, env(safe-area-inset-bottom));
+  background: rgba(10, 22, 15, 0.90);
+  backdrop-filter: blur(5px);
+}
+
+.photo-viewer-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  max-height: 100%;
+  overflow: hidden;
+  background: #16251b;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.38);
+}
+
+.photo-viewer-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 16px 18px;
+}
+
+.photo-viewer-heading {
+  min-width: 0;
+
+  h2 {
+    margin: 0 0 5px;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    margin: 0;
+    color: #b9c9bd;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.photo-viewer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 23px;
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.24);
+  }
+}
+
+.photo-viewer-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 150px;
+  max-height: min(65vh, 650px);
+  overflow: hidden;
+  background: #0f1912;
+  touch-action: pan-y;
+}
+
+.photo-viewer-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: min(65vh, 650px);
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.photo-viewer-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 27px;
+    pointer-events: none;
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.photo-viewer-prev {
+  left: 12px;
+}
+
+.photo-viewer-next {
+  right: 12px;
+}
+
+.photo-viewer-dots {
+  padding: 15px 12px 8px;
+  background: #16251b;
+}
+
+.photo-viewer-dot {
+  background: #647b6a;
+
+  &.active {
+    background: #69d194;
+  }
+}
+
+.photo-viewer-help {
+  margin: 0;
+  padding: 0 16px 15px;
+  color: #afc2b4;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* =====================================
+   GALLERY BUTTON ACCESSIBILITY
+===================================== */
+
+.pet-photo-view-button,
+.pet-photo-nav,
+.pet-photo-dot,
+.photo-viewer-close,
+.photo-viewer-nav,
+.photo-viewer-dot {
+  &:focus-visible {
+    outline: 3px solid #69d194;
+    outline-offset: 3px;
+  }
+}
+
+/* =====================================
+   MOBILE GALLERY ADJUSTMENTS
+===================================== */
+
+@media (max-width: 400px) {
+  .pet-photo-view-button {
+    min-height: 130px;
+
+    img {
+      max-height: 340px;
+    }
+  }
+
+  .pet-photo-nav {
+    width: 34px;
+    height: 34px;
+
+    ion-icon {
+      font-size: 21px;
+    }
+  }
+
+  .photo-viewer-overlay {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .photo-viewer-modal {
+    border-radius: 13px;
+  }
+
+  .photo-viewer-header {
+    padding: 12px;
+  }
+
+  .photo-viewer-heading h2 {
+    font-size: 15px;
+  }
+
+  .photo-viewer-stage,
+  .photo-viewer-image {
+    max-height: 60vh;
+  }
+
+  .photo-viewer-nav {
+    width: 36px;
+    height: 36px;
+
+    ion-icon {
+      font-size: 23px;
+    }
+  }
+
+  .photo-viewer-prev {
+    left: 7px;
+  }
+
+  .photo-viewer-next {
+    right: 7px;
+  }
+}
+
+/* =====================================
+   REDUCED MOTION PREFERENCE
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-photo-view-button,
+  .pet-photo-nav,
+  .photo-viewer-nav {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}
+
+
+/* =====================================
+   MY REPORTS-ONLY: STATUS AND ACTIONS
+   Base design intentionally matches Lost & Found.
+===================================== */
+
+.my-report-status {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #edf0f2;
+  color: #52605a;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.status-badge[data-status="pending"] {
+  background: #fff3de;
+  color: #95650d;
+}
+
+.status-badge[data-status="under_review"],
+.status-badge[data-status="in_progress"] {
+  background: #e9f1ff;
+  color: #386ca6;
+}
+
+.status-badge[data-status="resolved"] {
+  background: #e2f4e9;
+  color: #268554;
+}
+
+.status-badge[data-status="closed"] {
+  background: #edf0f2;
+  color: #64746a;
+}
+
+.no-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 155px;
+  margin-bottom: 16px;
+  border: 1px dashed #cddfd3;
+  border-radius: 14px;
+  background: #f7fbf8;
+  color: #8a9c90;
+
+  ion-icon {
+    font-size: 38px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
+
+.report-management-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.edit-button,
+.resolve-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 43px;
+  padding: 11px 14px;
+  border: 1px solid #c6e6d1;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 19px;
+    flex-shrink: 0;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #268554;
+    outline-offset: 3px;
+  }
+}
+
+.edit-button {
+  background: #eaf7ee;
+  color: #268554;
+}
+
+.resolve-button {
+  border-color: #268554;
+  background: #268554;
+  color: #ffffff;
+
+  ion-spinner {
+    width: 18px;
+    height: 18px;
+    color: #ffffff;
+  }
+
+  &:active {
+    background: #207448;
+  }
+}
+
+.resolved-info,
+.closed-info,
+.resolve-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid #c6e6d1;
+  border-radius: 11px;
+  background: #eaf7ee;
+  color: #236b47;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.55;
+  text-align: center;
+
+  ion-icon {
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+}
+
+.closed-info {
+  border-color: #e1e7e3;
+  background: #f4f6f4;
+  color: #667369;
+}
+
+.resolve-message {
+  margin-bottom: 16px;
+}
+
+.filter-container button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.report-button:disabled {
+  opacity: 0.6;
+}

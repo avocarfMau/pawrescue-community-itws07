@@ -1,0 +1,153 @@
+
+<ion-content class="ion-padding">
+
+  <div class="register-container">
+
+    <div class="logo">🐾</div>
+
+    <h1>Create Account</h1>
+    <p>Join the PawRescue Community</p>
+
+    <form (ngSubmit)="register()">
+
+      <!-- First Name -->
+      <ion-input
+        label="First Name"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        name="first_name"
+        autocomplete="given-name"
+        [maxlength]="100"
+        [(ngModel)]="form.first_name"
+        required>
+      </ion-input>
+
+      <!-- Middle Name -->
+      <ion-input
+        label="Middle Name (Optional)"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        name="middle_name"
+        autocomplete="additional-name"
+        [maxlength]="100"
+        [(ngModel)]="form.middle_name">
+      </ion-input>
+
+      <!-- Last Name -->
+      <ion-input
+        label="Last Name"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        name="last_name"
+        autocomplete="family-name"
+        [maxlength]="100"
+        [(ngModel)]="form.last_name"
+        required>
+      </ion-input>
+
+      <!-- Email Address -->
+      <ion-input
+        label="Email Address"
+        label-placement="floating"
+        fill="outline"
+        type="email"
+        name="email"
+        autocomplete="email"
+        [maxlength]="150"
+        [(ngModel)]="form.email"
+        required>
+      </ion-input>
+
+      <!-- Username -->
+      <ion-input
+        label="Username"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        name="username"
+        autocomplete="username"
+        [maxlength]="50"
+        [(ngModel)]="form.username"
+        required>
+      </ion-input>
+
+      <!-- Contact Number -->
+      <ion-input
+        label="Contact Number"
+        label-placement="floating"
+        fill="outline"
+        type="tel"
+        name="contact_number"
+        autocomplete="tel"
+        [maxlength]="16"
+        [(ngModel)]="form.contact_number"
+        required>
+      </ion-input>
+
+      <!-- Password -->
+      <ion-input
+        label="Password"
+        label-placement="floating"
+        fill="outline"
+        type="password"
+        name="password"
+        autocomplete="new-password"
+        [maxlength]="72"
+        [(ngModel)]="form.password"
+        required>
+      </ion-input>
+
+      <!-- Confirm Password -->
+      <ion-input
+        label="Confirm Password"
+        label-placement="floating"
+        fill="outline"
+        type="password"
+        name="confirm_password"
+        autocomplete="new-password"
+        [maxlength]="72"
+        [(ngModel)]="form.confirm_password"
+        required>
+      </ion-input>
+
+      <!-- Error Message -->
+      <p class="error" *ngIf="errorMessage" role="alert">
+        {{ errorMessage }}
+      </p>
+
+      <!-- Success Message -->
+      <p class="success" *ngIf="successMessage" role="status">
+        {{ successMessage }}
+      </p>
+
+      <!-- Register Button -->
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="loading">
+
+        <ion-spinner
+          *ngIf="loading"
+          name="crescent">
+        </ion-spinner>
+
+        <span *ngIf="!loading">
+          Register
+        </span>
+
+      </ion-button>
+
+    </form>
+
+    <!-- Login Navigation -->
+    <p class="login-text">
+      Already have an account?
+      <a routerLink="/login">Log In</a>
+    </p>
+
+  </div>
+
+</ion-content>

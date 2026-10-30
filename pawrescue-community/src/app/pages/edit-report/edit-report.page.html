@@ -1,0 +1,327 @@
+<ion-content [fullscreen]="true">
+  <div class="page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        [disabled]="saving || uploadingPhoto || deletingPhotoId !== null">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
+      <div>
+        <h1>Edit Report</h1>
+        <p>Update your submitted pet report information</p>
+      </div>
+    </div>
+
+    <!-- LOADING STATE -->
+    <div class="loading-state" *ngIf="loading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Loading report information...</p>
+    </div>
+
+    <!-- ERROR LOADING REPORT -->
+    <div class="error-state" *ngIf="!loading && !originalReport && errorMessage">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <h3>Unable to Open Report</h3>
+      <p>{{ errorMessage }}</p>
+      <ion-button expand="block" (click)="goBack()">Back to My Reports</ion-button>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div class="success-card" *ngIf="!loading && saved">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <h2>Report Updated!</h2>
+      <p>{{ successMessage }}</p>
+      <p class="report-number">Report ID: #{{ reportId }}</p>
+      <ion-button expand="block" (click)="viewReports()">View My Reports</ion-button>
+    </div>
+
+    <!-- EDIT REPORT FORM -->
+    <div *ngIf="!loading && originalReport && !saved">
+      <div class="info-card">
+        <ion-icon name="paw-outline"></ion-icon>
+        <div>
+          <h2>Update Pet Information</h2>
+          <p>Review and correct the information in your existing lost or found pet report.</p>
+        </div>
+      </div>
+
+      <div class="edit-report-info">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <div>
+          <strong>Editing Report #{{ reportId }}</strong>
+          <p>Changes to the details are saved using the Save Changes button.</p>
+        </div>
+      </div>
+
+      <form (ngSubmit)="saveChanges()" #editForm="ngForm">
+        <!-- REPORT TYPE -->
+        <div class="form-group">
+          <label for="reportType">Report Type <span>*</span></label>
+          <select id="reportType" name="report_type"
+                  [(ngModel)]="form.report_type"
+                  [disabled]="saving || uploadingPhoto || deletingPhotoId !== null" required>
+            <option value="lost">Lost Pet</option>
+            <option value="found">Found Pet</option>
+          </select>
+        </div>
+
+        <!-- ANIMAL TYPE -->
+        <div class="form-group">
+          <label for="animalType">Animal Type <span>*</span></label>
+          <select id="animalType" name="animal_type"
+                  [(ngModel)]="form.animal_type"
+                  [disabled]="saving || uploadingPhoto || deletingPhotoId !== null" required>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </div>
+
+        <!-- PET NAME -->
+        <div class="form-group">
+          <label for="petName">Pet Name (Optional)</label>
+          <input id="petName" type="text" name="pet_name"
+                 placeholder="Enter pet name if known"
+                 maxlength="100" [(ngModel)]="form.pet_name"
+                 [disabled]="saving || uploadingPhoto || deletingPhotoId !== null">
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="form-group">
+          <label for="description">Pet Description <span>*</span></label>
+          <textarea id="description" name="description" rows="5"
+                    maxlength="5000"
+                    placeholder="Describe the color, breed, size, markings, or collar..."
+                    [(ngModel)]="form.description"
+                    [disabled]="saving || uploadingPhoto || deletingPhotoId !== null"
+                    required></textarea>
+        </div>
+
+        <!-- INCIDENT DATE -->
+        <div class="form-group">
+          <label for="incidentDate">Date Lost / Found <span>*</span></label>
+          <input id="incidentDate" type="date" name="incident_date"
+                 [max]="today" [(ngModel)]="form.incident_date"
+                 [disabled]="saving || uploadingPhoto || deletingPhotoId !== null" required>
+        </div>
+
+        <!-- LOCATION DETAILS -->
+        <div class="location-details-card">
+          <div class="location-details-heading">
+            <ion-icon name="location-outline"></ion-icon>
+            <div>
+              <h3>Pet Location Details</h3>
+              <p>Update where the pet was lost or found.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="barangay">Barangay <span>*</span></label>
+            <div class="location-select-wrapper">
+              <select id="barangay" name="barangay"
+                      [(ngModel)]="selectedBarangay"
+                      (ngModelChange)="updateLocationAddress()"
+                      [disabled]="saving || uploadingPhoto || deletingPhotoId !== null" required>
+                <option value="" disabled>Select Barangay</option>
+                <option *ngFor="let barangay of barangays" [value]="barangay">
+                  {{ barangay }}
+                </option>
+              </select>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </div>
+            <small>Select the barangay where the pet was lost or found.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="landmark">Street / Nearby Landmark (Optional)</label>
+            <textarea id="landmark" name="landmark" rows="2" maxlength="150"
+                      placeholder="e.g., Near barangay hall, beside public market"
+                      [(ngModel)]="landmark"
+                      (ngModelChange)="updateLocationAddress()"
+                      [disabled]="saving || uploadingPhoto || deletingPhotoId !== null"></textarea>
+            <small>Update the street or landmark if needed.</small>
+          </div>
+
+          <div class="location-reminder">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <p>You can adjust the saved pin on the map below.</p>
+          </div>
+        </div>
+
+        <!-- MAP LOCATION -->
+        <div class="form-group location-section">
+          <label>Pin Location on Map (Optional)</label>
+          <p class="location-description">
+            Your saved location is retained unless you change or clear it.
+          </p>
+          <div class="location-actions">
+            <button type="button"
+                    class="location-action-button current-location-button"
+                    (click)="useCurrentLocation()"
+                    [disabled]="saving || uploadingPhoto || deletingPhotoId !== null || gettingLocation">
+              <ion-spinner *ngIf="gettingLocation" name="crescent"></ion-spinner>
+              <ion-icon *ngIf="!gettingLocation" name="locate-outline"></ion-icon>
+              <span>{{ gettingLocation ? 'Getting Location...' : 'Use Current Location' }}</span>
+            </button>
+            <button type="button" class="location-action-button map-toggle-button"
+                    (click)="toggleMap()"
+                    [disabled]="saving || uploadingPhoto || deletingPhotoId !== null">
+              <ion-icon name="map-outline"></ion-icon>
+              <span>{{ showMap ? 'Hide Map' : 'View / Edit Map' }}</span>
+            </button>
+          </div>
+
+          <p class="error-message" *ngIf="locationError" role="alert">{{ locationError }}</p>
+          <p class="location-message" *ngIf="locationMessage" role="status">{{ locationMessage }}</p>
+
+          <div class="location-map-wrapper" *ngIf="showMap">
+            <div class="location-map-header">
+              <span><ion-icon name="location-outline"></ion-icon> Tap the map to update the pin</span>
+            </div>
+            <div #locationMap class="location-map"
+                 aria-label="Interactive map for editing pet location"></div>
+            <p class="map-help-text">Tap anywhere or drag the pin to adjust the location.</p>
+          </div>
+
+          <div class="selected-location-card"
+               *ngIf="selectedLatitude !== null && selectedLongitude !== null">
+            <div class="selected-location-header">
+              <ion-icon name="location-outline"></ion-icon>
+              <strong>Location Selected</strong>
+            </div>
+            <div class="coordinate-details">
+              <span>Latitude: {{ selectedLatitude | number:'1.6-7' }}</span>
+              <span>Longitude: {{ selectedLongitude | number:'1.6-7' }}</span>
+            </div>
+            <button type="button" class="clear-location-button"
+                    (click)="clearSelectedLocation()"
+                    [disabled]="saving || uploadingPhoto || deletingPhotoId !== null">
+              <ion-icon name="close-outline"></ion-icon> Clear Location
+            </button>
+          </div>
+          <small>GPS coordinates are optional. Check that the pin matches the real incident location.</small>
+        </div>
+
+        <!-- MULTIPLE PET PHOTO MANAGEMENT -->
+        <div class="photo-management-section">
+          <div class="photo-management-heading">
+            <div>
+              <h3>Pet Photos</h3>
+              <p>Manage photos attached to this report.</p>
+            </div>
+            <span class="photo-selection-badge">
+              {{ existingPhotos.length + selectedPhotos.length }} / {{ maxPhotos }}
+            </span>
+          </div>
+
+          <p class="photo-management-help">
+            Add more pictures or delete an existing picture. Photo changes take effect immediately;
+            report details are saved separately with Save Changes.
+          </p>
+
+          <div class="existing-photo-note" *ngIf="existingPhotos.length === 0">
+            <ion-icon name="image-outline"></ion-icon>
+            <p>No photos uploaded yet. Add clear photos from different angles.</p>
+          </div>
+
+          <!-- CURRENT SAVED PHOTOS -->
+          <div class="edit-photo-grid" *ngIf="existingPhotos.length > 0">
+            <div class="edit-photo-card" *ngFor="let photo of existingPhotos; let i = index">
+              <div class="edit-photo-image">
+                <img *ngIf="getPhotoUrl(photo.photo_path) as photoUrl"
+                     [src]="photoUrl" [alt]="'Saved pet photo ' + (i + 1)" loading="lazy">
+              </div>
+              <span class="edit-photo-caption">Photo {{ i + 1 }}</span>
+              <button type="button" class="edit-photo-remove"
+                      (click)="deleteExistingPhoto(photo)"
+                      [disabled]="loading || saving || uploadingPhoto || cameraOpening || refreshingPhotos || deletingPhotoId !== null || photo.id < 1 || photoUploadUncertain">
+                <ion-spinner *ngIf="deletingPhotoId === photo.id" name="crescent"></ion-spinner>
+                <ion-icon *ngIf="deletingPhotoId !== photo.id" name="close-circle-outline"></ion-icon>
+                {{ deletingPhotoId === photo.id ? 'Deleting...' : 'Delete Photo' }}
+              </button>
+            </div>
+          </div>
+
+          <!-- SELECT NEW PHOTOS -->
+          <div class="edit-photo-choices">
+            <label class="photo-upload-label edit-photo-picker">
+              <ion-icon name="image-outline"></ion-icon>
+              <span>Choose / Add Photos</span>
+              <input type="file" accept="image/jpeg,image/png,image/webp" multiple
+                     class="edit-photo-file-input"
+                     (change)="onPhotosSelected($event)"
+                     [disabled]="loading || saving || uploadingPhoto || cameraOpening || refreshingPhotos || deletingPhotoId !== null || photoUploadUncertain || remainingPhotoSlots === 0">
+            </label>
+            <button type="button" class="photo-upload-label edit-photo-camera"
+                    (click)="takePhoto()"
+                    [disabled]="loading || saving || uploadingPhoto || cameraOpening || refreshingPhotos || deletingPhotoId !== null || photoUploadUncertain || remainingPhotoSlots === 0">
+              <ion-icon name="camera-outline"></ion-icon>
+              <span>{{ cameraOpening ? 'Opening Camera...' : 'Take Photo' }}</span>
+            </button>
+          </div>
+          <small class="edit-photo-hint">JPG, PNG, or WebP · Up to 5 MB each · Maximum 10 photos per report.</small>
+
+          <!-- PENDING PHOTO PREVIEWS -->
+          <div *ngIf="selectedPhotos.length > 0" class="pending-photo-section">
+            <h4>New Photos (Not Yet Uploaded)</h4>
+            <div class="edit-photo-grid">
+              <div class="edit-photo-card" *ngFor="let photo of selectedPhotos; let i = index">
+                <div class="edit-photo-image">
+                  <img [src]="photo.previewUrl" [alt]="'New photo ' + (i + 1)">
+                </div>
+                <span class="edit-photo-caption">New photo {{ i + 1 }}</span>
+                <button type="button" class="edit-photo-remove"
+                        (click)="removeSelectedPhoto(i)"
+                        [disabled]="loading || saving || uploadingPhoto || cameraOpening || deletingPhotoId !== null">
+                  <ion-icon name="close-circle-outline"></ion-icon> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="edit-photo-progress" *ngIf="uploadingPhoto" role="status">
+            <ion-spinner name="crescent"></ion-spinner>
+            Uploading photo {{ currentPhotoNumber }}...
+          </div>
+          <p class="location-message" *ngIf="photoActionMessage" role="status">
+            {{ photoActionMessage }}
+          </p>
+          <p class="error-message" *ngIf="photoError" role="alert">{{ photoError }}</p>
+
+          <div class="edit-photo-actions">
+            <ion-button type="button" expand="block" (click)="uploadSelectedPhotos()"
+                        [disabled]="loading || saving || uploadingPhoto || cameraOpening || refreshingPhotos || deletingPhotoId !== null || selectedPhotos.length === 0 || photoUploadUncertain">
+              <ion-spinner *ngIf="uploadingPhoto" name="crescent"></ion-spinner>
+              <span *ngIf="!uploadingPhoto">Add {{ selectedPhotos.length }} Photo(s)</span>
+              <span *ngIf="uploadingPhoto">Uploading...</span>
+            </ion-button>
+            <ion-button type="button" expand="block" fill="outline" (click)="refreshPhotos()"
+                        [disabled]="loading || saving || uploadingPhoto || refreshingPhotos || deletingPhotoId !== null">
+              <ion-icon name="refresh-outline" slot="start"></ion-icon>
+              Refresh Photos
+            </ion-button>
+          </div>
+        </div>
+
+        <!-- REPORT VALIDATION ERROR -->
+        <p class="error-message" *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
+
+        <!-- FORM ACTIONS -->
+        <div class="edit-actions">
+          <ion-button expand="block" fill="outline" type="button"
+                      [disabled]="saving || uploadingPhoto || deletingPhotoId !== null"
+                      (click)="goBack()">Cancel</ion-button>
+          <ion-button expand="block" type="submit"
+                      [disabled]="saving || uploadingPhoto || deletingPhotoId !== null || photoUploadUncertain || editForm.invalid">
+            <ion-spinner *ngIf="saving" name="crescent"></ion-spinner>
+            <span *ngIf="!saving">Save Changes</span>
+            <span *ngIf="saving">Saving Changes...</span>
+          </ion-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

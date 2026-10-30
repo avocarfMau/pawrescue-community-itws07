@@ -1,0 +1,63 @@
+
+<ion-content class="ion-padding">
+  <div class="login-container">
+
+    <div class="logo">🐾</div>
+
+    <h1>PawRescue Community</h1>
+    <p>Welcome back! Please log in.</p>
+
+    <form (ngSubmit)="login()">
+
+      <ion-input
+        label="Email or Username"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+        name="loginInput"
+        [(ngModel)]="loginInput">
+      </ion-input>
+
+      <ion-input
+        label="Password"
+        label-placement="floating"
+        fill="outline"
+        [type]="showPassword ? 'text' : 'password'"
+        name="password"
+        [(ngModel)]="password">
+      </ion-input>
+
+      <ion-button
+        type="button"
+        fill="clear"
+        size="small"
+        (click)="showPassword = !showPassword">
+        {{ showPassword ? 'Hide' : 'Show' }} Password
+      </ion-button>
+
+      <p class="error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="loading">
+
+        <ion-spinner
+          *ngIf="loading"
+          name="crescent">
+        </ion-spinner>
+
+        <span *ngIf="!loading">Log In</span>
+      </ion-button>
+
+    </form>
+
+    <p class="register-text">
+      Don't have an account?
+      <a routerLink="/register">Register</a>
+    </p>
+
+  </div>
+</ion-content>

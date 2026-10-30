@@ -1,0 +1,60 @@
+
+# =====================================
+# PAWRESCUE COMMUNITY
+# =====================================
+
+# NODE / IONIC
+node_modules/
+.angular/
+.ionic/
+www/
+dist/
+coverage/
+
+# =====================================
+# EXCLUDE PET ADOPTION MODULE
+# =====================================
+
+# Pet Adoption Frontend Pages
+pawrescue-community/src/app/pages/pet-adoption/
+pawrescue-community/src/app/pages/post-adoption/
+pawrescue-community/src/app/pages/my-adoptions/
+pawrescue-community/src/app/pages/adoption-details/
+
+# Pet Adoption Angular Service
+pawrescue-community/src/app/services/pet-adoption.ts
+pawrescue-community/src/app/services/pet-adoption.service.ts
+pawrescue-community/src/app/services/pet-adoption.spec.ts
+
+# Pet Adoption Backend APIs
+pawrescue_api/adoption/
+
+# =====================================
+# PRIVATE FILES
+# =====================================
+
+.env
+.env.*
+pawrescue_api/config/database.php
+pawrescue_api/test_db.php
+
+# User Uploaded Images
+pawrescue_api/uploads/*
+!pawrescue_api/uploads/.htaccess
+
+# Android Private Files
+**/local.properties
+**/*.keystore
+**/*.jks
+**/google-services.json
+
+# Generated Build Files
+**/.gradle/
+**/build/
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/
