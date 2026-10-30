@@ -1,0 +1,763 @@
+
+<!-- =====================================
+     PAWRESCUE COMMUNITY
+     ADOPTION DETAILS PAGE
+===================================== -->
+
+<ion-content
+  [fullscreen]="true"
+  class="adoption-details-content"
+>
+
+  <div class="details-container">
+
+    <!-- =====================================
+         PAGE HEADER
+    ===================================== -->
+
+    <header class="page-header">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        aria-label="Go back"
+      >
+        <ion-icon
+          name="arrow-back-outline"
+        ></ion-icon>
+      </button>
+
+      <div class="header-text">
+        <h1>Pet Details</h1>
+        <p>Pet Adoption Community</p>
+      </div>
+
+    </header>
+
+    <!-- =====================================
+         LOADING STATE
+    ===================================== -->
+
+    <div
+      class="loading-state"
+      *ngIf="loading"
+    >
+
+      <ion-spinner
+        name="crescent"
+      ></ion-spinner>
+
+      <p>Loading pet information...</p>
+
+    </div>
+
+    <!-- =====================================
+         ERROR MESSAGE
+    ===================================== -->
+
+    <div
+      class="message-box error-message"
+      *ngIf="errorMessage"
+      role="alert"
+    >
+
+      <ion-icon
+        name="information-circle-outline"
+      ></ion-icon>
+
+      <span>{{ errorMessage }}</span>
+
+    </div>
+
+    <!-- =====================================
+         SUCCESS MESSAGE
+    ===================================== -->
+
+    <div
+      class="message-box success-message"
+      *ngIf="successMessage"
+      role="status"
+    >
+
+      <ion-icon
+        name="heart-outline"
+      ></ion-icon>
+
+      <span>{{ successMessage }}</span>
+
+    </div>
+
+    <!-- =====================================
+         PET DETAILS
+    ===================================== -->
+
+    <ng-container *ngIf="post as pet">
+
+      <!-- =====================================
+           MAIN PET CARD
+      ===================================== -->
+
+      <section class="pet-details-card">
+
+        <!-- =====================================
+             PET PHOTO GALLERY
+        ===================================== -->
+
+        <div
+          class="pet-gallery"
+          (touchstart)="onTouchStart($event)"
+          (touchend)="onTouchEnd($event)"
+        >
+
+          <ng-container
+            *ngIf="photoUrl as currentPhoto; else noPhoto"
+          >
+
+            <button
+              type="button"
+              class="gallery-photo-button"
+              (click)="viewerOpen = true"
+              aria-label="View enlarged pet photo"
+            >
+
+              <img
+                class="gallery-photo"
+                [src]="currentPhoto"
+                [alt]="pet.pet_name || 'Pet photo'"
+              />
+
+            </button>
+
+          </ng-container>
+
+          <!-- NO PHOTO -->
+
+          <ng-template #noPhoto>
+
+            <div class="no-photo">
+
+              <ion-icon
+                name="paw-outline"
+              ></ion-icon>
+
+              <p>No pet photos available</p>
+
+            </div>
+
+          </ng-template>
+
+          <!-- PHOTO COUNTER -->
+
+          <span
+            class="photo-counter"
+            *ngIf="photos.length > 0"
+          >
+            {{ photoIndex + 1 }}
+            /
+            {{ photos.length }}
+          </span>
+
+          <!-- PREVIOUS PHOTO -->
+
+          <button
+            type="button"
+            class="gallery-arrow previous"
+            *ngIf="photos.length > 1"
+            (click)="movePhoto(-1)"
+            aria-label="Previous photo"
+          >
+
+            <ion-icon
+              name="chevron-back-outline"
+            ></ion-icon>
+
+          </button>
+
+          <!-- NEXT PHOTO -->
+
+          <button
+            type="button"
+            class="gallery-arrow next"
+            *ngIf="photos.length > 1"
+            (click)="movePhoto(1)"
+            aria-label="Next photo"
+          >
+
+            <ion-icon
+              name="chevron-forward-outline"
+            ></ion-icon>
+
+          </button>
+
+        </div>
+
+        <!-- =====================================
+             PHOTO DOT INDICATORS
+        ===================================== -->
+
+        <div
+          class="gallery-dots"
+          *ngIf="photos.length > 1"
+        >
+
+          <button
+            type="button"
+            class="gallery-dot"
+            *ngFor="
+              let photo of photos;
+              let i = index
+            "
+            [class.active]="photoIndex === i"
+            [attr.aria-label]="'View photo ' + (i + 1)"
+            (click)="photoIndex = i"
+          ></button>
+
+        </div>
+
+        <!-- =====================================
+             PET MAIN INFORMATION
+        ===================================== -->
+
+        <div class="pet-main-info">
+
+          <div class="pet-title-row">
+
+            <h2>
+              {{ pet.pet_name || 'Unnamed Pet' }}
+            </h2>
+
+            <span
+              class="adoption-status"
+              [class.available]="pet.status === 'available'"
+              [class.reserved]="pet.status === 'reserved'"
+              [class.adopted]="pet.status === 'adopted'"
+            >
+              {{ pet.status | titlecase }}
+            </span>
+
+          </div>
+
+          <!-- PET TAGS -->
+
+          <div class="pet-tags">
+
+            <span class="pet-tag">
+              {{ pet.animal_type | titlecase }}
+            </span>
+
+            <span class="pet-tag">
+              {{ pet.sex | titlecase }}
+            </span>
+
+            <span
+              class="pet-tag"
+              *ngIf="pet.age_months !== null"
+            >
+              {{ pet.age_months }}
+              month{{ pet.age_months === 1 ? '' : 's' }}
+              old
+            </span>
+
+          </div>
+
+          <!-- BREED -->
+
+          <div
+            class="info-row"
+            *ngIf="pet.breed"
+          >
+
+            <strong>Breed:</strong>
+
+            <span>{{ pet.breed }}</span>
+
+          </div>
+
+          <!-- PET OWNER -->
+
+          <div class="info-row">
+
+            <strong>Posted By:</strong>
+
+            <span>
+              {{ pet.owner_name || 'Resident' }}
+            </span>
+
+          </div>
+
+          <!-- DATE POSTED -->
+
+          <div class="info-row">
+
+            <strong>Date Posted:</strong>
+
+            <span>
+              {{ pet.created_at | date:'mediumDate' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =====================================
+           PET DESCRIPTION
+      ===================================== -->
+
+      <section class="details-section">
+
+        <h2>About This Pet</h2>
+
+        <p class="description-text">
+          {{ pet.description }}
+        </p>
+
+      </section>
+
+      <!-- =====================================
+           HEALTH INFORMATION
+      ===================================== -->
+
+      <section
+        class="details-section"
+        *ngIf="pet.health_notes"
+      >
+
+        <h2>Health Information</h2>
+
+        <p class="description-text">
+          {{ pet.health_notes }}
+        </p>
+
+      </section>
+
+      <!-- =====================================
+           PET LOCATION
+      ===================================== -->
+
+      <section class="details-section">
+
+        <h2>Pet Location</h2>
+
+        <div class="location-info">
+
+          <ion-icon
+            name="location-outline"
+          ></ion-icon>
+
+          <div>
+
+            <strong>
+              {{ pet.barangay }}
+            </strong>
+
+            <p *ngIf="pet.location_details">
+              {{ pet.location_details }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =====================================
+           OWNER INFORMATION
+      ===================================== -->
+
+      <section
+        class="details-section owner-notice"
+        *ngIf="pet.is_owner"
+      >
+
+        <ion-icon
+          name="paw-outline"
+        ></ion-icon>
+
+        <div>
+
+          <h2>This Is Your Adoption Post</h2>
+
+          <p>
+            You cannot submit an adoption
+            request for your own pet.
+            You can manage incoming requests
+            in My Adoptions.
+          </p>
+
+          <ion-button
+            expand="block"
+            class="my-adoptions-button"
+            (click)="goToMyAdoptions()"
+          >
+            Go to My Adoptions
+          </ion-button>
+
+        </div>
+
+      </section>
+
+      <!-- =====================================
+           ADOPTION REQUEST FORM
+      ===================================== -->
+
+      <section
+        class="details-section request-section"
+        *ngIf="
+          !pet.is_owner &&
+          pet.status === 'available' &&
+          !requested &&
+          !requestUncertain
+        "
+      >
+
+        <div class="request-header">
+
+          <ion-icon
+            name="heart-outline"
+          ></ion-icon>
+
+          <div>
+
+            <h2>Interested in Adopting?</h2>
+
+            <p>
+              Send an adoption request to
+              express your interest in giving
+              this pet a loving home.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- REQUEST FORM -->
+
+        <form
+          #requestForm="ngForm"
+          (ngSubmit)="sendRequest()"
+        >
+
+          <div class="form-group">
+
+            <label for="adoptionMessage">
+              Adoption Message
+              <span class="required">*</span>
+            </label>
+
+            <textarea
+              id="adoptionMessage"
+              name="adoptionMessage"
+              [(ngModel)]="message"
+              rows="6"
+              minlength="10"
+              maxlength="2000"
+              required
+              [disabled]="submitting"
+              placeholder="Introduce yourself and explain why you would like to adopt this pet..."
+            ></textarea>
+
+            <small>
+              Minimum 10 characters.
+              Maximum 2,000 characters.
+            </small>
+
+          </div>
+
+          <!-- REMINDER -->
+
+          <div class="adoption-reminder">
+
+            <ion-icon
+              name="information-circle-outline"
+            ></ion-icon>
+
+            <p>
+              Submitting a request does not
+              automatically approve the adoption.
+              The pet owner will review your
+              application before deciding.
+            </p>
+
+          </div>
+
+          <!-- SUBMIT BUTTON -->
+
+          <ion-button
+            type="submit"
+            expand="block"
+            class="request-button"
+            [disabled]="
+              submitting ||
+              !requestForm.valid ||
+              message.trim().length < 10
+            "
+          >
+
+            <ion-spinner
+              *ngIf="submitting"
+              name="crescent"
+              slot="start"
+            ></ion-spinner>
+
+            <ion-icon
+              *ngIf="!submitting"
+              name="heart-outline"
+              slot="start"
+            ></ion-icon>
+
+            {{ submitting
+              ? 'Submitting Request...'
+              : 'Submit Adoption Request' }}
+
+          </ion-button>
+
+        </form>
+
+      </section>
+
+      <!-- =====================================
+           REQUEST SUBMITTED
+      ===================================== -->
+
+      <section
+        class="details-section submitted-section"
+        *ngIf="requested"
+      >
+
+        <ion-icon
+          name="heart-outline"
+        ></ion-icon>
+
+        <h2>Request Submitted!</h2>
+
+        <p>
+          Your adoption request has been
+          submitted. You can track its status
+          under My Adoptions.
+        </p>
+
+        <ion-button
+          expand="block"
+          class="my-adoptions-button"
+          (click)="goToMyAdoptions()"
+        >
+          View My Adoption Requests
+        </ion-button>
+
+      </section>
+
+      <!-- =====================================
+           REQUEST STATUS UNCERTAIN
+      ===================================== -->
+
+      <section
+        class="details-section"
+        *ngIf="requestUncertain && !requested"
+      >
+
+        <h2>Check Your Request Status</h2>
+
+        <p class="description-text">
+          Please check My Adoptions to confirm
+          whether your request was recorded
+          before submitting another application.
+        </p>
+
+        <ion-button
+          expand="block"
+          class="my-adoptions-button"
+          (click)="goToMyAdoptions()"
+        >
+          View My Adoptions
+        </ion-button>
+
+      </section>
+
+      <!-- =====================================
+           PET NOT AVAILABLE
+      ===================================== -->
+
+      <section
+        class="details-section unavailable-section"
+        *ngIf="
+          !pet.is_owner &&
+          pet.status !== 'available'
+        "
+      >
+
+        <ion-icon
+          name="information-circle-outline"
+        ></ion-icon>
+
+        <h2>Pet Currently Unavailable</h2>
+
+        <p>
+          This pet is currently
+          {{ pet.status | titlecase }}.
+          New adoption requests are not
+          being accepted at this time.
+        </p>
+
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="goBack()"
+        >
+          Browse Other Pets
+        </ion-button>
+
+      </section>
+
+    </ng-container>
+
+    <!-- =====================================
+         RETRY IF PET DID NOT LOAD
+    ===================================== -->
+
+    <div
+      class="retry-section"
+      *ngIf="!loading && !post"
+    >
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="load()"
+      >
+        Try Again
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        (click)="goBack()"
+      >
+        Back to Pet Adoption
+      </ion-button>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================
+       FULLSCREEN PHOTO VIEWER
+  ===================================== -->
+
+  <div
+    class="photo-viewer"
+    *ngIf="viewerOpen && post"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Pet photo viewer"
+    (click)="viewerOpen = false"
+  >
+
+    <!-- VIEWER HEADER -->
+
+    <div class="viewer-header">
+
+      <div class="viewer-info">
+
+        <h3>
+          {{ post.pet_name }}
+        </h3>
+
+        <p>
+          {{ photoIndex + 1 }}
+          of
+          {{ photos.length }}
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="viewer-close"
+        (click)="viewerOpen = false"
+        aria-label="Close photo viewer"
+      >
+        <ion-icon
+          name="close-outline"
+        ></ion-icon>
+      </button>
+
+    </div>
+
+    <!-- VIEWER PHOTO -->
+
+    <div
+      class="viewer-body"
+      (touchstart)="onTouchStart($event)"
+      (touchend)="onTouchEnd($event)"
+      (click)="$event.stopPropagation()"
+    >
+
+      <img
+        *ngIf="photoUrl as enlargedPhoto"
+        class="viewer-image"
+        [src]="enlargedPhoto"
+        [alt]="post.pet_name || 'Pet photo'"
+      />
+
+      <!-- PREVIOUS -->
+
+      <button
+        type="button"
+        class="viewer-arrow previous"
+        *ngIf="photos.length > 1"
+        (click)="movePhoto(-1)"
+        aria-label="Previous photo"
+      >
+
+        <ion-icon
+          name="chevron-back-outline"
+        ></ion-icon>
+
+      </button>
+
+      <!-- NEXT -->
+
+      <button
+        type="button"
+        class="viewer-arrow next"
+        *ngIf="photos.length > 1"
+        (click)="movePhoto(1)"
+        aria-label="Next photo"
+      >
+
+        <ion-icon
+          name="chevron-forward-outline"
+        ></ion-icon>
+
+      </button>
+
+    </div>
+
+    <!-- VIEWER DOTS -->
+
+    <div
+      class="viewer-dots"
+      *ngIf="photos.length > 1"
+      (click)="$event.stopPropagation()"
+    >
+
+      <button
+        type="button"
+        class="viewer-dot"
+        *ngFor="
+          let photo of photos;
+          let i = index
+        "
+        [class.active]="photoIndex === i"
+        [attr.aria-label]="'View enlarged photo ' + (i + 1)"
+        (click)="photoIndex = i"
+      ></button>
+
+    </div>
+
+  </div>
+
+</ion-content>

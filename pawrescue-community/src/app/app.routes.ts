@@ -53,6 +53,33 @@ export const routes: Routes = [
     canActivate: [residentGuard],
   },
 
+  // =====================================
+  // PET ADOPTION COMMUNITY
+  // =====================================
+
+  {
+    path: 'pet-adoption',
+    loadComponent: () => import('./pages/pet-adoption/pet-adoption.page').then((m) => m.PetAdoptionPage),
+    canActivate: [residentGuard],
+  },
+
+  {
+    path: 'post-adoption',
+    loadComponent: () => import('./pages/post-adoption/post-adoption.page').then((m) => m.PostAdoptionPage),
+    canActivate: [residentGuard],
+  },
+
+  {
+    path: 'my-adoptions',
+    loadComponent: () => import('./pages/my-adoptions/my-adoptions.page').then((m) => m.MyAdoptionsPage),
+    canActivate: [residentGuard],
+  },
+
+  {
+    path: 'adoption-details/:id',
+    loadComponent: () => import('./pages/adoption-details/adoption-details.page').then((m) => m.AdoptionDetailsPage),
+    canActivate: [residentGuard],
+  },
 
   // Keep this route at the very end
   {

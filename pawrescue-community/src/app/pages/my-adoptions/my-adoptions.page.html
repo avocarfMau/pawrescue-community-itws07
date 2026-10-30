@@ -1,0 +1,800 @@
+
+<!-- =====================================
+     PAWRESCUE COMMUNITY
+     MY ADOPTIONS PAGE
+===================================== -->
+
+<ion-content
+  [fullscreen]="true"
+  class="my-adoptions-content"
+>
+
+  <div class="my-adoptions-container">
+
+    <!-- =====================================
+         HEADER
+    ===================================== -->
+
+    <header class="page-header">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+        aria-label="Back to Pet Adoption"
+      >
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
+
+      <div class="header-text">
+        <h1>My Adoptions</h1>
+        <p>Manage your pet adoption activities</p>
+      </div>
+
+      <button
+        type="button"
+        class="refresh-button"
+        (click)="loadAll()"
+        [disabled]="loading || busy"
+        aria-label="Refresh adoptions"
+      >
+        <ion-icon name="refresh-outline"></ion-icon>
+      </button>
+
+    </header>
+
+    <!-- =====================================
+         INTRODUCTION
+    ===================================== -->
+
+    <section class="intro-card">
+
+      <ion-icon name="paw-outline"></ion-icon>
+
+      <div>
+        <h2>Adoption Management</h2>
+        <p>
+          Manage your adoption listings and
+          keep track of adoption requests.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- =====================================
+         POST A PET BUTTON
+    ===================================== -->
+
+    <ion-button
+      expand="block"
+      class="post-button"
+      (click)="postPet()"
+      [disabled]="busy"
+    >
+      <ion-icon
+        name="add-outline"
+        slot="start"
+      ></ion-icon>
+
+      Post a Pet for Adoption
+
+    </ion-button>
+
+    <!-- =====================================
+         SUCCESS MESSAGE
+    ===================================== -->
+
+    <div
+      class="message-box success-message"
+      *ngIf="successMessage"
+      role="status"
+    >
+      <ion-icon
+        name="checkmark-circle-outline"
+      ></ion-icon>
+
+      <span>{{ successMessage }}</span>
+    </div>
+
+    <!-- =====================================
+         ERROR MESSAGE
+    ===================================== -->
+
+    <div
+      class="message-box error-message"
+      *ngIf="errorMessage"
+      role="alert"
+    >
+      <ion-icon name="close-outline"></ion-icon>
+
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <!-- =====================================
+         TABS
+    ===================================== -->
+
+    <div
+      class="adoption-tabs"
+      role="group"
+      aria-label="Adoption management tabs"
+    >
+
+      <button
+        type="button"
+        class="tab-button"
+        [class.active]="selectedTab === 'posts'"
+        [attr.aria-pressed]="selectedTab === 'posts'"
+        (click)="setTab('posts')"
+      >
+        My Posts
+
+        <span class="tab-count">
+          {{ posts.length }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="tab-button"
+        [class.active]="selectedTab === 'received'"
+        [attr.aria-pressed]="selectedTab === 'received'"
+        (click)="setTab('received')"
+      >
+        Received
+
+        <span class="tab-count">
+          {{ received.length }}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="tab-button"
+        [class.active]="selectedTab === 'sent'"
+        [attr.aria-pressed]="selectedTab === 'sent'"
+        (click)="setTab('sent')"
+      >
+        Sent
+
+        <span class="tab-count">
+          {{ sent.length }}
+        </span>
+      </button>
+
+    </div>
+
+    <!-- =====================================
+         LOADING
+    ===================================== -->
+
+    <div
+      class="loading-state"
+      *ngIf="loading"
+    >
+      <ion-spinner name="crescent"></ion-spinner>
+
+      <p>Loading adoption information...</p>
+    </div>
+
+    <!-- =====================================
+         MY ADOPTION POSTS
+    ===================================== -->
+
+    <section
+      class="tab-content"
+      *ngIf="!loading && selectedTab === 'posts'"
+    >
+
+      <div class="section-heading">
+        <h2>My Adoption Posts</h2>
+
+        <p>
+          View pets you have posted for adoption.
+        </p>
+      </div>
+
+      <!-- EMPTY POSTS -->
+
+      <div
+        class="empty-state"
+        *ngIf="posts.length === 0"
+      >
+        <ion-icon name="paw-outline"></ion-icon>
+
+        <h3>No Adoption Posts Yet</h3>
+
+        <p>
+          You have not posted any pets
+          for adoption.
+        </p>
+
+        <ion-button
+          fill="outline"
+          (click)="postPet()"
+        >
+          Post Your First Pet
+        </ion-button>
+      </div>
+
+      <!-- POST CARDS -->
+
+      <article
+        class="adoption-card"
+        *ngFor="
+          let post of posts;
+          trackBy: trackPost
+        "
+      >
+
+        <!-- POST HEADER -->
+
+        <div class="card-header">
+
+          <div class="pet-avatar">
+            <ion-icon name="paw-outline"></ion-icon>
+          </div>
+
+          <div class="card-heading">
+            <h3>
+              {{ post.pet_name || 'Unnamed Pet' }}
+            </h3>
+
+            <p>
+              Posted
+              {{ post.created_at | date:'mediumDate' }}
+            </p>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.status-available]="post.status === 'available'"
+            [class.status-reserved]="post.status === 'reserved'"
+            [class.status-adopted]="post.status === 'adopted'"
+          >
+            {{ statusLabel(post.status) }}
+          </span>
+
+        </div>
+
+        <!-- PET INFO -->
+
+        <div class="pet-info">
+
+          <div class="pet-tags">
+
+            <span class="pet-tag">
+              {{ post.animal_type | titlecase }}
+            </span>
+
+            <span class="pet-tag">
+              {{ post.sex | titlecase }}
+            </span>
+
+            <span
+              class="pet-tag"
+              *ngIf="post.age_months !== null"
+            >
+              {{ post.age_months }}
+              month{{ post.age_months === 1 ? '' : 's' }}
+              old
+            </span>
+
+          </div>
+
+          <p
+            class="pet-description"
+            *ngIf="post.description"
+          >
+            {{ post.description }}
+          </p>
+
+        </div>
+
+        <!-- PHOTO GALLERY -->
+
+        <div
+          class="pet-gallery"
+          (touchstart)="touchStart($event)"
+          (touchend)="touchEnd($event, post)"
+        >
+
+          <ng-container
+            *ngIf="currentUrl(post) as photoUrl; else noPhoto"
+          >
+
+            <button
+              type="button"
+              class="gallery-image-button"
+              (click)="viewerPost = post"
+              aria-label="View enlarged pet photo"
+            >
+              <img
+                [src]="photoUrl"
+                [alt]="post.pet_name || 'Pet photo'"
+                class="gallery-image"
+                loading="lazy"
+              />
+            </button>
+
+          </ng-container>
+
+          <ng-template #noPhoto>
+            <div class="no-photo">
+              <ion-icon name="paw-outline"></ion-icon>
+              <p>No photos available</p>
+            </div>
+          </ng-template>
+
+          <!-- PHOTO COUNTER -->
+
+          <span
+            class="photo-counter"
+            *ngIf="photoUrls(post).length > 0"
+          >
+            {{ index(post) + 1 }}
+            /
+            {{ photoUrls(post).length }}
+          </span>
+
+          <!-- PREVIOUS -->
+
+          <button
+            type="button"
+            class="gallery-arrow previous"
+            *ngIf="photoUrls(post).length > 1"
+            (click)="movePhoto(post, -1)"
+            aria-label="Previous photo"
+          >
+            <ion-icon
+              name="chevron-back-outline"
+            ></ion-icon>
+          </button>
+
+          <!-- NEXT -->
+
+          <button
+            type="button"
+            class="gallery-arrow next"
+            *ngIf="photoUrls(post).length > 1"
+            (click)="movePhoto(post, 1)"
+            aria-label="Next photo"
+          >
+            <ion-icon
+              name="chevron-forward-outline"
+            ></ion-icon>
+          </button>
+
+        </div>
+
+        <!-- PHOTO DOTS -->
+
+        <div
+          class="gallery-dots"
+          *ngIf="photoUrls(post).length > 1"
+        >
+          <button
+            type="button"
+            class="gallery-dot"
+            *ngFor="
+              let photo of photoUrls(post);
+              let photoIndex = index
+            "
+            [class.active]="index(post) === photoIndex"
+            [attr.aria-label]="
+              'View photo ' + (photoIndex + 1)
+            "
+            (click)="movePhoto(post, photoIndex - index(post))"
+          ></button>
+        </div>
+
+        <!-- LOCATION -->
+
+        <div class="pet-location">
+
+          <ion-icon
+            name="location-outline"
+          ></ion-icon>
+
+          <span>
+            {{ post.barangay }}
+
+            <ng-container
+              *ngIf="post.location_details"
+            >
+              · {{ post.location_details }}
+            </ng-container>
+          </span>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="card-actions">
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            (click)="viewPost(post)"
+          >
+            View Details
+          </ion-button>
+
+          <ion-button
+            expand="block"
+            class="complete-button"
+            *ngIf="post.status === 'reserved'"
+            (click)="finishAdoption(post)"
+            [disabled]="busy"
+          >
+            <ion-icon
+              name="checkmark-circle-outline"
+              slot="start"
+            ></ion-icon>
+
+            Confirm Handover
+          </ion-button>
+
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- =====================================
+         RECEIVED ADOPTION REQUESTS
+    ===================================== -->
+
+    <section
+      class="tab-content"
+      *ngIf="!loading && selectedTab === 'received'"
+    >
+
+      <div class="section-heading">
+        <h2>Received Requests</h2>
+
+        <p>
+          Review adoption applications
+          submitted for your pets.
+        </p>
+      </div>
+
+      <!-- EMPTY RECEIVED -->
+
+      <div
+        class="empty-state"
+        *ngIf="received.length === 0"
+      >
+        <ion-icon name="heart-outline"></ion-icon>
+
+        <h3>No Received Requests</h3>
+
+        <p>
+          Adoption requests from interested
+          residents will appear here.
+        </p>
+      </div>
+
+      <!-- RECEIVED REQUEST CARDS -->
+
+      <article
+        class="request-card"
+        *ngFor="
+          let request of received;
+          trackBy: trackRequest
+        "
+      >
+
+        <div class="request-header">
+
+          <div class="request-avatar">
+            <ion-icon name="heart-outline"></ion-icon>
+          </div>
+
+          <div class="request-heading">
+
+            <h3>
+              {{ request.requester_name }}
+            </h3>
+
+            <p>
+              Wants to adopt
+              <strong>{{ request.pet_name }}</strong>
+            </p>
+
+          </div>
+
+          <span
+            class="request-status"
+            [class.pending]="request.status === 'pending'"
+            [class.approved]="request.status === 'approved'"
+            [class.rejected]="request.status === 'rejected'"
+          >
+            {{ statusLabel(request.status) }}
+          </span>
+
+        </div>
+
+        <!-- REQUEST MESSAGE -->
+
+        <div class="request-body">
+
+          <p class="request-label">
+            Adoption Message
+          </p>
+
+          <p class="request-message">
+            {{ request.message || 'No message provided.' }}
+          </p>
+
+          <p class="request-date">
+            Submitted
+            {{ request.created_at | date:'mediumDate' }}
+          </p>
+
+        </div>
+
+        <!-- APPROVE / REJECT -->
+
+        <div
+          class="request-actions"
+          *ngIf="request.status === 'pending'"
+        >
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="danger"
+            (click)="actOnRequest(request, 'reject')"
+            [disabled]="busy"
+          >
+            Reject
+          </ion-button>
+
+          <ion-button
+            expand="block"
+            class="approve-button"
+            (click)="actOnRequest(request, 'approve')"
+            [disabled]="busy"
+          >
+            Approve
+          </ion-button>
+
+        </div>
+
+        <p
+          class="approved-note"
+          *ngIf="request.status === 'approved'"
+        >
+          Request approved. Complete the pet handover
+          before marking the adoption as completed.
+        </p>
+
+      </article>
+
+    </section>
+
+    <!-- =====================================
+         SENT ADOPTION REQUESTS
+    ===================================== -->
+
+    <section
+      class="tab-content"
+      *ngIf="!loading && selectedTab === 'sent'"
+    >
+
+      <div class="section-heading">
+        <h2>Sent Requests</h2>
+
+        <p>
+          Track your applications to adopt
+          pets from other residents.
+        </p>
+      </div>
+
+      <!-- EMPTY SENT -->
+
+      <div
+        class="empty-state"
+        *ngIf="sent.length === 0"
+      >
+        <ion-icon name="heart-outline"></ion-icon>
+
+        <h3>No Sent Requests</h3>
+
+        <p>
+          You have not submitted any
+          adoption requests yet.
+        </p>
+
+        <ion-button
+          fill="outline"
+          (click)="goBack()"
+        >
+          Browse Adoptable Pets
+        </ion-button>
+
+      </div>
+
+      <!-- SENT REQUEST CARDS -->
+
+      <article
+        class="request-card"
+        *ngFor="
+          let request of sent;
+          trackBy: trackRequest
+        "
+      >
+
+        <div class="request-header">
+
+          <div class="request-avatar">
+            <ion-icon name="paw-outline"></ion-icon>
+          </div>
+
+          <div class="request-heading">
+
+            <h3>{{ request.pet_name }}</h3>
+
+            <p>
+              Pet Owner:
+              {{ request.owner_name }}
+            </p>
+
+          </div>
+
+          <span
+            class="request-status"
+            [class.pending]="request.status === 'pending'"
+            [class.approved]="request.status === 'approved'"
+            [class.rejected]="request.status === 'rejected'"
+          >
+            {{ statusLabel(request.status) }}
+          </span>
+
+        </div>
+
+        <div class="request-body">
+
+          <div class="pet-tags">
+            <span class="pet-tag">
+              {{ request.animal_type | titlecase }}
+            </span>
+
+            <span class="pet-tag">
+              Pet:
+              {{ statusLabel(request.adoption_status) }}
+            </span>
+          </div>
+
+          <p class="request-label">
+            Your Message
+          </p>
+
+          <p class="request-message">
+            {{ request.message || 'No message provided.' }}
+          </p>
+
+          <p class="request-date">
+            Submitted
+            {{ request.created_at | date:'mediumDate' }}
+          </p>
+
+          <p
+            class="approved-note"
+            *ngIf="request.status === 'approved'"
+          >
+            Your request has been approved.
+            Coordinate the actual handover
+            with the pet owner.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+  </div>
+
+  <!-- =====================================
+       FULL PHOTO VIEWER
+  ===================================== -->
+
+  <div
+    class="photo-viewer"
+    *ngIf="viewerPost as post"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Adoption photo viewer"
+    (click)="viewerPost = null"
+  >
+
+    <div class="viewer-header">
+
+      <div class="viewer-title">
+
+        <h3>{{ post.pet_name }}</h3>
+
+        <p>
+          {{ index(post) + 1 }}
+          of
+          {{ photoUrls(post).length }}
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="viewer-close"
+        aria-label="Close photo viewer"
+        (click)="viewerPost = null; $event.stopPropagation()"
+      >
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+    </div>
+
+    <div
+      class="viewer-body"
+      (touchstart)="touchStart($event)"
+      (touchend)="touchEnd($event, post)"
+      (click)="$event.stopPropagation()"
+    >
+
+      <img
+        *ngIf="currentUrl(post) as imageUrl"
+        class="viewer-image"
+        [src]="imageUrl"
+        [alt]="post.pet_name"
+      />
+
+      <button
+        type="button"
+        class="viewer-arrow previous"
+        *ngIf="photoUrls(post).length > 1"
+        (click)="movePhoto(post, -1)"
+        aria-label="Previous photo"
+      >
+        <ion-icon
+          name="chevron-back-outline"
+        ></ion-icon>
+      </button>
+
+      <button
+        type="button"
+        class="viewer-arrow next"
+        *ngIf="photoUrls(post).length > 1"
+        (click)="movePhoto(post, 1)"
+        aria-label="Next photo"
+      >
+        <ion-icon
+          name="chevron-forward-outline"
+        ></ion-icon>
+      </button>
+
+    </div>
+
+    <div
+      class="viewer-dots"
+      *ngIf="photoUrls(post).length > 1"
+      (click)="$event.stopPropagation()"
+    >
+
+      <button
+        type="button"
+        class="viewer-dot"
+        *ngFor="
+          let photo of photoUrls(post);
+          let photoIndex = index
+        "
+        [class.active]="index(post) === photoIndex"
+        [attr.aria-label]="'View photo ' + (photoIndex + 1)"
+        (click)="movePhoto(post, photoIndex - index(post))"
+      ></button>
+
+    </div>
+
+  </div>
+
+</ion-content>

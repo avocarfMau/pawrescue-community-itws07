@@ -11,23 +11,6 @@ www/
 dist/
 coverage/
 
-# =====================================
-# EXCLUDE PET ADOPTION MODULE
-# =====================================
-
-# Pet Adoption Frontend Pages
-pawrescue-community/src/app/pages/pet-adoption/
-pawrescue-community/src/app/pages/post-adoption/
-pawrescue-community/src/app/pages/my-adoptions/
-pawrescue-community/src/app/pages/adoption-details/
-
-# Pet Adoption Angular Service
-pawrescue-community/src/app/services/pet-adoption.ts
-pawrescue-community/src/app/services/pet-adoption.service.ts
-pawrescue-community/src/app/services/pet-adoption.spec.ts
-
-# Pet Adoption Backend APIs
-pawrescue_api/adoption/
 
 # =====================================
 # PRIVATE FILES

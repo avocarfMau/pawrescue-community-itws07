@@ -1,0 +1,871 @@
+
+/* =====================================
+   PAWRESCUE COMMUNITY
+   ADOPTION DETAILS - SIMPLE DESIGN
+===================================== */
+
+:host {
+  display: block;
+}
+
+.adoption-details-content {
+  --background: #f5f7f5;
+}
+
+.details-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px 14px 45px;
+}
+
+/* =====================================
+   PAGE HEADER
+===================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: #e6f4ea;
+  color: #2e7d32;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.header-text {
+  flex: 1;
+
+  h1 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1b4332;
+  }
+
+  p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #777;
+  }
+}
+
+/* =====================================
+   LOADING STATE
+===================================== */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  border-radius: 14px;
+  background: white;
+
+  ion-spinner {
+    color: #2e7d32;
+  }
+
+  p {
+    margin-top: 15px;
+    color: #777;
+    font-size: 13px;
+  }
+}
+
+/* =====================================
+   SUCCESS / ERROR MESSAGES
+===================================== */
+
+.message-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+
+  ion-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  span {
+    flex: 1;
+    overflow-wrap: anywhere;
+  }
+}
+
+.error-message {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.success-message {
+  background: #e6f4ea;
+  color: #246e37;
+}
+
+/* =====================================
+   MAIN PET CARD
+===================================== */
+
+.pet-details-card {
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid #e5e9e5;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* =====================================
+   PET PHOTO GALLERY
+===================================== */
+
+.pet-gallery {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #eef1ee;
+}
+
+.gallery-photo-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.gallery-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.no-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  color: #999;
+
+  ion-icon {
+    font-size: 45px;
+    color: #9eb9a3;
+  }
+
+  p {
+    margin: 10px 0 0;
+    font-size: 12px;
+  }
+}
+
+/* PHOTO COUNTER */
+
+.photo-counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* PHOTO ARROWS */
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.gallery-arrow.previous {
+  left: 10px;
+}
+
+.gallery-arrow.next {
+  right: 10px;
+}
+
+/* PHOTO DOTS */
+
+.gallery-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 12px;
+  background: white;
+}
+
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.gallery-dot.active {
+  width: 18px;
+  border-radius: 6px;
+  background: #2e7d32;
+}
+
+/* =====================================
+   PET MAIN INFORMATION
+===================================== */
+
+.pet-main-info {
+  padding: 18px 16px 20px;
+}
+
+.pet-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+
+  h2 {
+    margin: 0;
+    color: #222;
+    font-size: 23px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =====================================
+   ADOPTION STATUS
+===================================== */
+
+.adoption-status {
+  flex-shrink: 0;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #eeeeee;
+  color: #666;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.adoption-status.available {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.adoption-status.reserved {
+  background: #fff3cd;
+  color: #946200;
+}
+
+.adoption-status.adopted {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* =====================================
+   PET TAGS
+===================================== */
+
+.pet-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.pet-tag {
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #f0f5f1;
+  color: #39734b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =====================================
+   INFORMATION ROWS
+===================================== */
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  line-height: 1.5;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  strong {
+    min-width: 100px;
+    color: #333;
+    font-weight: 600;
+  }
+
+  span {
+    flex: 1;
+    color: #666;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =====================================
+   DETAILS SECTIONS
+===================================== */
+
+.details-section {
+  margin-bottom: 16px;
+  padding: 20px 16px;
+  border: 1px solid #e5e9e5;
+  border-radius: 14px;
+  background: white;
+
+  h2 {
+    margin: 0 0 14px;
+    color: #1b4332;
+    font-size: 17px;
+    font-weight: 700;
+  }
+}
+
+.description-text {
+  margin: 0;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================
+   PET LOCATION
+===================================== */
+
+.location-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  > ion-icon {
+    margin-top: 2px;
+    color: #2e7d32;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  strong {
+    color: #333;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =====================================
+   OWNER NOTICE
+===================================== */
+
+.owner-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #f0f8f1;
+
+  > ion-icon {
+    margin-top: 2px;
+    color: #2e7d32;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  > div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  h2 {
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0 0 16px;
+    color: #526b58;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+}
+
+/* =====================================
+   ADOPTION REQUEST SECTION
+===================================== */
+
+.request-section {
+  border-color: #d5e8d8;
+}
+
+.request-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  > ion-icon {
+    margin-top: 3px;
+    color: #2e7d32;
+    font-size: 27px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    margin: 0 0 8px;
+  }
+
+  p {
+    margin: 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+/* =====================================
+   ADOPTION MESSAGE INPUT
+===================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 17px;
+
+  label {
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 140px;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #d8ded8;
+    border-radius: 10px;
+    background: white;
+    color: #222;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  textarea:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.08);
+  }
+
+  textarea::placeholder {
+    color: #999;
+  }
+
+  textarea:disabled {
+    background: #f3f3f3;
+    opacity: 0.7;
+  }
+
+  small {
+    color: #888;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+}
+
+.required {
+  color: #d32f2f;
+}
+
+/* =====================================
+   ADOPTION REMINDER
+===================================== */
+
+.adoption-reminder {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #fff8e1;
+
+  ion-icon {
+    margin-top: 2px;
+    color: #a07800;
+    font-size: 21px;
+    flex-shrink: 0;
+  }
+
+  p {
+    margin: 0;
+    color: #765c14;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+/* =====================================
+   ACTION BUTTONS
+===================================== */
+
+.request-button,
+.my-adoptions-button {
+  margin: 0;
+  min-height: 47px;
+  --background: #2e7d32;
+  --color: white;
+  --border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.request-button ion-spinner {
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+/* =====================================
+   REQUEST SUBMITTED
+===================================== */
+
+.submitted-section {
+  text-align: center;
+  background: #f0f8f1;
+
+  > ion-icon {
+    font-size: 43px;
+    color: #2e7d32;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 0 0 20px;
+    color: #526b58;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
+/* =====================================
+   PET UNAVAILABLE
+===================================== */
+
+.unavailable-section {
+  text-align: center;
+
+  > ion-icon {
+    font-size: 40px;
+    color: #a07800;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 0 0 20px;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  ion-button {
+    --color: #2e7d32;
+    --border-color: #2e7d32;
+    --border-radius: 10px;
+    text-transform: none;
+  }
+}
+
+/* =====================================
+   RETRY SECTION
+===================================== */
+
+.retry-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 0;
+
+  ion-button {
+    margin: 0;
+    --color: #2e7d32;
+    --border-color: #2e7d32;
+    --border-radius: 10px;
+    text-transform: none;
+  }
+}
+
+/* =====================================
+   FULLSCREEN PHOTO VIEWER
+===================================== */
+
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.96);
+  color: white;
+}
+
+/* VIEWER HEADER */
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(16px + env(safe-area-inset-top))
+    18px 16px;
+}
+
+.viewer-info {
+  flex: 1;
+
+  h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+  }
+
+  p {
+    margin: 0;
+    color: #bbb;
+    font-size: 12px;
+  }
+}
+
+.viewer-close {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: #333;
+  color: white;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+/* VIEWER PHOTO */
+
+.viewer-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+}
+
+.viewer-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* VIEWER ARROWS */
+
+.viewer-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.viewer-arrow.previous {
+  left: 10px;
+}
+
+.viewer-arrow.next {
+  right: 10px;
+}
+
+/* VIEWER PHOTO DOTS */
+
+.viewer-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 15px;
+  padding-bottom: calc(
+    15px + env(safe-area-inset-bottom)
+  );
+}
+
+.viewer-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #555;
+  cursor: pointer;
+}
+
+.viewer-dot.active {
+  width: 18px;
+  border-radius: 6px;
+  background: white;
+}
+
+/* =====================================
+   ACCESSIBILITY
+===================================== */
+
+button:focus-visible {
+  outline: 2px solid #2e7d32;
+  outline-offset: 3px;
+}
+
+.viewer-close:focus-visible,
+.viewer-arrow:focus-visible,
+.viewer-dot:focus-visible {
+  outline-color: white;
+}
+
+/* =====================================
+   MOBILE RESPONSIVENESS
+===================================== */
+
+@media (max-width: 400px) {
+
+  .details-container {
+    padding: 12px 10px 35px;
+  }
+
+  .pet-main-info {
+    padding: 16px 12px;
+  }
+
+  .pet-title-row {
+    gap: 8px;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .adoption-status {
+    font-size: 10px;
+    padding: 6px 9px;
+  }
+
+  .details-section {
+    padding: 16px 12px;
+  }
+
+  .info-row {
+    font-size: 12px;
+
+    strong {
+      min-width: 85px;
+    }
+  }
+
+  .request-header {
+    gap: 10px;
+  }
+
+  .gallery-arrow {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (min-width: 600px) {
+
+  .details-container {
+    padding-top: 24px;
+  }
+
+  .pet-main-info {
+    padding: 24px;
+  }
+
+  .details-section {
+    padding: 24px;
+  }
+}
