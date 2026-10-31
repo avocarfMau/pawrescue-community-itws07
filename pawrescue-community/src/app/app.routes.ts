@@ -46,13 +46,31 @@ export const routes: Routes = [
   // =====================================
   // EDIT EXISTING PET REPORT
   // =====================================
-
   {
     path: 'edit-report/:id',
     loadComponent: () => import('./pages/edit-report/edit-report.page').then((m) => m.EditReportPage),
     canActivate: [residentGuard],
   },
 
+  // =====================================
+  // STRAY ANIMAL ASSISTANCE
+  // =====================================
+  {
+    path: 'stray-assistance',
+    loadComponent: () =>
+      import('./pages/stray-assistance/stray-assistance.page').then((m) => m.StrayAssistancePage),
+    canActivate: [residentGuard],
+  },
+
+  // =====================================
+  // REPORT STRAY ANIMAL
+  // =====================================
+  {
+    path: 'report-stray',
+    loadComponent: () =>
+      import('./pages/report-stray/report-stray.page').then((m) => m.ReportStrayPage),
+    canActivate: [residentGuard],
+  },
 
   // Keep this route at the very end
   {
