@@ -51,14 +51,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/edit-report/edit-report.page').then((m) => m.EditReportPage),
     canActivate: [residentGuard],
   },
-
-  // =====================================
+  
+   // =====================================
   // STRAY ANIMAL ASSISTANCE
   // =====================================
   {
     path: 'stray-assistance',
     loadComponent: () =>
-      import('./pages/stray-assistance/stray-assistance.page').then((m) => m.StrayAssistancePage),
+      import('./pages/stray-assistance/stray-assistance.page').then(
+        (m) => m.StrayAssistancePage
+      ),
     canActivate: [residentGuard],
   },
 
@@ -68,9 +70,51 @@ export const routes: Routes = [
   {
     path: 'report-stray',
     loadComponent: () =>
-      import('./pages/report-stray/report-stray.page').then((m) => m.ReportStrayPage),
+      import('./pages/report-stray/report-stray.page').then(
+        (m) => m.ReportStrayPage
+      ),
     canActivate: [residentGuard],
   },
+
+  // =====================================
+  // PET ADOPTION COMMUNITY
+  // =====================================
+  {
+    path: 'pet-adoption',
+    loadComponent: () =>
+      import('./pages/pet-adoption/pet-adoption.page').then(
+        (m) => m.PetAdoptionPage
+      ),
+    canActivate: [residentGuard],
+  },
+
+  {
+    path: 'post-adoption',
+    loadComponent: () =>
+      import('./pages/post-adoption/post-adoption.page').then(
+        (m) => m.PostAdoptionPage
+      ),
+    canActivate: [residentGuard],
+  },
+
+  {
+    path: 'my-adoptions',
+    loadComponent: () =>
+      import('./pages/my-adoptions/my-adoptions.page').then(
+        (m) => m.MyAdoptionsPage
+      ),
+    canActivate: [residentGuard],
+  },
+
+  {
+    path: 'adoption-details/:id',
+    loadComponent: () =>
+      import('./pages/adoption-details/adoption-details.page').then(
+        (m) => m.AdoptionDetailsPage
+      ),
+    canActivate: [residentGuard],
+  },
+  
 
   // Keep this route at the very end
   {

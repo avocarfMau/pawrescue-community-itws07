@@ -1,0 +1,495 @@
+
+/* =====================================
+   PAWRESCUE COMMUNITY
+   POST ADOPTION - SIMPLE DESIGN
+===================================== */
+
+:host {
+  display: block;
+}
+
+.post-adoption-content {
+  --background: #f5f7f5;
+}
+
+.post-adoption-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px 14px 45px;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: #e6f4ea;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.back-button:disabled {
+  opacity: 0.5;
+}
+
+.header-text {
+  flex: 1;
+
+  h1 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1b4332;
+  }
+
+  p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #777;
+  }
+}
+
+/* =====================================
+   INTRODUCTION
+===================================== */
+
+.intro-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #e6f4ea;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+
+  > ion-icon {
+    font-size: 35px;
+    color: #2e7d32;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1b4332;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #526b58;
+  }
+}
+
+/* =====================================
+   FORM LAYOUT
+===================================== */
+
+.adoption-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-section {
+  padding: 20px 16px;
+  background: #fff;
+  border: 1px solid #e5e9e5;
+  border-radius: 14px;
+
+  h2 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1b4332;
+  }
+}
+
+.section-description {
+  margin: 0 0 20px;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =====================================
+   INPUT FIELDS
+===================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 18px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  input,
+  select,
+  textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #d8ded8;
+    border-radius: 9px;
+    background: #fff;
+    color: #222;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.08);
+  }
+
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    background: #f3f3f3;
+    opacity: 0.7;
+  }
+
+  textarea {
+    min-height: 90px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #999;
+  }
+
+  small {
+    color: #888;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+}
+
+.required {
+  color: #d32f2f;
+}
+
+/* =====================================
+   PHOTO SECTION
+===================================== */
+
+.photo-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.photo-count {
+  padding: 6px 10px;
+  background: #e6f4ea;
+  border-radius: 20px;
+  color: #2e7d32;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.photo-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.photo-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 10px;
+  border: 1px solid #2e7d32;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+
+  ion-icon {
+    font-size: 18px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.gallery-button {
+  color: #2e7d32;
+  background: #e6f4ea;
+}
+
+.camera-button {
+  color: #fff;
+  background: #2e7d32;
+}
+
+/* =====================================
+   SELECTED PHOTO PREVIEWS
+===================================== */
+
+.selected-photos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.selected-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  background: #eef1ee;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.photo-number {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  padding: 4px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.remove-photo-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  color: #d32f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 25px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+/* =====================================
+   NO PHOTOS
+===================================== */
+
+.no-photos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 130px;
+  border: 2px dashed #d3dfd3;
+  border-radius: 10px;
+  background: #fafcfa;
+  color: #999;
+
+  ion-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+.photo-help {
+  margin: 12px 0 0;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.5;
+}
+
+.photo-error {
+  color: #c62828;
+  background: #fff1f1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =====================================
+   SUCCESS / ERROR MESSAGES
+===================================== */
+
+.message-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+
+  ion-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.error-message {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.success-message {
+  background: #e6f4ea;
+  color: #246e37;
+}
+
+/* =====================================
+   SUBMISSION PROGRESS
+===================================== */
+
+.submission-progress {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px;
+  background: #e6f4ea;
+  border-radius: 12px;
+
+  ion-spinner {
+    width: 26px;
+    height: 26px;
+    color: #2e7d32;
+    flex-shrink: 0;
+  }
+
+  strong {
+    color: #1b4332;
+    font-size: 13px;
+  }
+
+  p {
+    margin: 5px 0 0;
+    color: #526b58;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+}
+
+/* =====================================
+   FORM BUTTONS
+===================================== */
+
+.submit-button {
+  margin: 4px 0 0;
+  min-height: 48px;
+  --background: #2e7d32;
+  --color: white;
+  --border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.my-adoptions-button {
+  margin: 4px 0 0;
+  min-height: 48px;
+  --background: #2e7d32;
+  --color: white;
+  --border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.cancel-button {
+  margin: 0;
+  --color: #777;
+  font-size: 13px;
+  text-transform: none;
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 400px) {
+
+  .post-adoption-container {
+    padding: 12px 10px 35px;
+  }
+
+  .form-section {
+    padding: 16px 12px;
+  }
+
+  .intro-card {
+    padding: 14px;
+  }
+
+  .selected-photos {
+    gap: 7px;
+  }
+
+  .photo-action-button {
+    font-size: 11px;
+    padding: 8px 6px;
+  }
+
+}
+
+@media (min-width: 600px) {
+
+  .selected-photos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+}

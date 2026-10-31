@@ -1,0 +1,870 @@
+
+/* =====================================
+   PAWRESCUE COMMUNITY
+   MY ADOPTIONS - SIMPLE GREEN DESIGN
+===================================== */
+
+:host {
+  display: block;
+}
+
+.my-adoptions-content {
+  --background: #f5f7f5;
+}
+
+.my-adoptions-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px 14px 45px;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-button,
+.refresh-button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: #e6f4ea;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+
+  h1 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1b4332;
+  }
+
+  p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #777;
+  }
+}
+
+/* =====================================
+   INTRODUCTION
+===================================== */
+
+.intro-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+  border-radius: 14px;
+  background: #e6f4ea;
+
+  > ion-icon {
+    font-size: 35px;
+    color: #2e7d32;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1b4332;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #526b58;
+  }
+}
+
+/* =====================================
+   POST A PET BUTTON
+===================================== */
+
+.post-button {
+  margin: 0 0 18px;
+  min-height: 45px;
+  --background: #2e7d32;
+  --color: white;
+  --border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* =====================================
+   SUCCESS AND ERROR MESSAGES
+===================================== */
+
+.message-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+
+  ion-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.success-message {
+  background: #e6f4ea;
+  color: #246e37;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+/* =====================================
+   ADOPTION TABS
+===================================== */
+
+.adoption-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background: #e9eeea;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px 5px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: #617063;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tab-button.active {
+  background: #2e7d32;
+  color: white;
+}
+
+.tab-count {
+  min-width: 19px;
+  height: 19px;
+  padding: 2px 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #d7e5d9;
+  color: #2e7d32;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.tab-button.active .tab-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+/* =====================================
+   SECTION HEADING
+===================================== */
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-heading {
+  margin-bottom: 2px;
+
+  h2 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #777;
+  }
+}
+
+/* =====================================
+   LOADING AND EMPTY STATE
+===================================== */
+
+.loading-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  border-radius: 14px;
+  background: white;
+  text-align: center;
+
+  > ion-icon {
+    font-size: 42px;
+    color: #2e7d32;
+    margin-bottom: 10px;
+  }
+
+  ion-spinner {
+    color: #2e7d32;
+  }
+
+  h3 {
+    margin: 5px 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  p {
+    margin: 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  ion-button {
+    margin-top: 15px;
+    --color: #2e7d32;
+    --border-color: #2e7d32;
+    --border-radius: 10px;
+    font-size: 12px;
+    text-transform: none;
+  }
+}
+
+/* =====================================
+   MY ADOPTION POST CARDS
+===================================== */
+
+.adoption-card {
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e5e9e5;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+}
+
+.pet-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e6f4ea;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.card-heading {
+  flex: 1;
+  min-width: 0;
+
+  h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    margin: 0;
+    font-size: 11px;
+    color: #888;
+  }
+}
+
+/* =====================================
+   ADOPTION STATUS BADGES
+===================================== */
+
+.status-badge {
+  padding: 6px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: #eeeeee;
+  color: #666;
+}
+
+.status-available {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.status-reserved {
+  background: #fff3cd;
+  color: #946200;
+}
+
+.status-adopted {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* =====================================
+   PET INFORMATION
+===================================== */
+
+.pet-info {
+  padding: 0 14px 14px;
+}
+
+.pet-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.pet-tag {
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #f0f5f1;
+  color: #39734b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pet-description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+/* =====================================
+   PET PHOTO GALLERY
+===================================== */
+
+.pet-gallery {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #eef1ee;
+}
+
+.gallery-image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.no-photo {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+
+  ion-icon {
+    font-size: 40px;
+  }
+
+  p {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+}
+
+.photo-counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+/* =====================================
+   PHOTO NAVIGATION ARROWS
+===================================== */
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.gallery-arrow.previous {
+  left: 10px;
+}
+
+.gallery-arrow.next {
+  right: 10px;
+}
+
+/* =====================================
+   GALLERY DOTS
+===================================== */
+
+.gallery-dots,
+.viewer-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px;
+}
+
+.gallery-dot,
+.viewer-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.gallery-dot.active {
+  width: 16px;
+  border-radius: 5px;
+  background: #2e7d32;
+}
+
+/* =====================================
+   PET LOCATION
+===================================== */
+
+.pet-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid #f0f0f0;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+
+  ion-icon {
+    font-size: 17px;
+    color: #2e7d32;
+    flex-shrink: 0;
+  }
+}
+
+/* =====================================
+   POST ACTION BUTTONS
+===================================== */
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 14px 14px;
+
+  ion-button {
+    margin: 0;
+    min-height: 42px;
+    --border-radius: 10px;
+    text-transform: none;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  ion-button[fill="outline"] {
+    --color: #2e7d32;
+    --border-color: #2e7d32;
+  }
+}
+
+.complete-button {
+  --background: #2e7d32;
+  --color: white;
+}
+
+/* =====================================
+   RECEIVED / SENT REQUEST CARDS
+===================================== */
+
+.request-card {
+  overflow: hidden;
+  border: 1px solid #e5e9e5;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.request-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.request-avatar {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e6f4ea;
+  border-radius: 50%;
+  color: #2e7d32;
+  font-size: 20px;
+}
+
+.request-heading {
+  flex: 1;
+  min-width: 0;
+
+  h3 {
+    margin: 0 0 5px;
+    color: #222;
+    font-size: 14px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    margin: 0;
+    color: #777;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  strong {
+    color: #333;
+  }
+}
+
+/* =====================================
+   REQUEST STATUS
+===================================== */
+
+.request-status {
+  padding: 6px 9px;
+  border-radius: 20px;
+  background: #eee;
+  color: #666;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.request-status.pending {
+  background: #fff3cd;
+  color: #946200;
+}
+
+.request-status.approved {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.request-status.rejected {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* =====================================
+   REQUEST DETAILS
+===================================== */
+
+.request-body {
+  padding: 14px;
+}
+
+.request-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #333;
+}
+
+.request-message {
+  margin: 0 0 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f6f8f6;
+  color: #555;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.request-date {
+  margin: 0;
+  color: #999;
+  font-size: 11px;
+}
+
+/* =====================================
+   APPROVE / REJECT BUTTONS
+===================================== */
+
+.request-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 14px 14px;
+
+  ion-button {
+    margin: 0;
+    min-height: 42px;
+    --border-radius: 10px;
+    text-transform: none;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+.approve-button {
+  --background: #2e7d32;
+  --color: white;
+}
+
+/* =====================================
+   APPROVED REQUEST MESSAGE
+===================================== */
+
+.approved-note {
+  margin: 0 14px 14px;
+  padding: 12px;
+  border-radius: 9px;
+  background: #e6f4ea;
+  color: #246e37;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =====================================
+   FULLSCREEN PHOTO VIEWER
+===================================== */
+
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.96);
+  color: white;
+}
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(16px + env(safe-area-inset-top))
+    18px 16px;
+}
+
+.viewer-title {
+  h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: #bbb;
+    font-size: 12px;
+  }
+}
+
+.viewer-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #333;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.viewer-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.viewer-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.viewer-arrow.previous {
+  left: 10px;
+}
+
+.viewer-arrow.next {
+  right: 10px;
+}
+
+.viewer-dot {
+  background: #555;
+}
+
+.viewer-dot.active {
+  width: 16px;
+  border-radius: 5px;
+  background: white;
+}
+
+.viewer-dots {
+  padding-bottom: calc(
+    15px + env(safe-area-inset-bottom)
+  );
+}
+
+/* =====================================
+   ACCESSIBILITY
+===================================== */
+
+button:focus-visible {
+  outline: 2px solid #2e7d32;
+  outline-offset: 3px;
+}
+
+/* =====================================
+   MOBILE RESPONSIVENESS
+===================================== */
+
+@media (max-width: 400px) {
+
+  .my-adoptions-container {
+    padding: 12px 10px 35px;
+  }
+
+  .intro-card {
+    padding: 14px;
+  }
+
+  .tab-button {
+    font-size: 11px;
+    padding: 8px 3px;
+  }
+
+  .card-header,
+  .request-header {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .status-badge,
+  .request-status {
+    font-size: 9px;
+    padding: 5px 7px;
+  }
+
+  .request-body {
+    padding: 12px;
+  }
+
+  .request-actions {
+    padding: 0 12px 12px;
+  }
+}
