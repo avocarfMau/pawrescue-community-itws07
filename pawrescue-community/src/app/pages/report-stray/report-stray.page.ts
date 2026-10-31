@@ -63,224 +63,8 @@ interface PhotoUploadResponse {
     IonButton,
     IonSpinner,
   ],
-  template: `
-    <ion-header class="ion-no-border">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-back-button defaultHref="/stray-assistance" text="Back" [disabled]="isSubmitting || uploadingPhotos"></ion-back-button>
-        </ion-buttons>
-        <ion-title>Report Stray Animal</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content [fullscreen]="true">
-      <main class="page-container">
-        <div class="intro">
-          <span class="eyebrow">STRAY ANIMAL ASSISTANCE</span>
-          <h1>Tell us about the animal</h1>
-          <p>Provide accurate details so Municipal Veterinary Office staff can assess the situation.</p>
-        </div>
-
-        <section *ngIf="submissionComplete" class="success-card" aria-live="polite">
-          <div class="success-icon" aria-hidden="true">✓</div>
-          <h2>Stray report saved</h2>
-          <p>Your report is awaiting review by the Municipal Veterinary Office.</p>
-          <p><strong>Report reference: #{{ submittedReportId }}</strong></p>
-          <p class="status-text">Status: Pending</p>
-
-          <div *ngIf="selectedPhotos.length" class="upload-summary">
-            <ion-spinner *ngIf="uploadingPhotos" name="crescent"></ion-spinner>
-            <p *ngIf="uploadingPhotos">
-              Uploading photo {{ currentPhotoNumber }} of {{ selectedPhotos.length }}...
-            </p>
-            <p>{{ uploadedPhotosCount }} of {{ selectedPhotos.length }} photos confirmed uploaded.</p>
-            <p *ngIf="allPhotosUploaded" class="success-text">All photos uploaded successfully.</p>
-            <p *ngIf="photoUploadMessage" class="error-text" role="alert">{{ photoUploadMessage }}</p>
-            <p *ngIf="photoUploadUncertain" class="notice">
-              The last upload may have reached the server without a response. Check your report before retrying to avoid duplicates.
-            </p>
-            <ion-button
-              *ngIf="!uploadingPhotos && !allPhotosUploaded && !photoUploadUncertain"
-              type="button" fill="outline" expand="block"
-              (click)="uploadRemainingPhotos()"
-            >Retry Remaining Photos</ion-button>
-          </div>
-
-          <ion-button expand="block" type="button" [disabled]="uploadingPhotos" (click)="backToAssistance()">
-            Back to Stray Animal Assistance
-          </ion-button>
-        </section>
-
-        <form *ngIf="!submissionComplete" #strayForm="ngForm" (ngSubmit)="reviewReport()" class="report-form">
-          <section class="form-card">
-            <h2>Animal information</h2>
-
-            <label for="animal-type">Animal type <span class="required">*</span></label>
-            <select id="animal-type" name="animal_type" [(ngModel)]="animalType" required [disabled]="isSubmitting">
-              <option value="" disabled>Select animal type</option>
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-            </select>
-
-            <label for="assistance-reason">Reason for assistance <span class="required">*</span></label>
-            <select id="assistance-reason" name="assistance_reason" [(ngModel)]="assistanceReason" required [disabled]="isSubmitting">
-              <option value="" disabled>Select a reason</option>
-              <option value="injured">Injured</option>
-              <option value="sick">Sick</option>
-              <option value="trapped">Trapped</option>
-              <option value="aggressive">Aggressive / safety concern</option>
-              <option value="abandoned">Possibly abandoned</option>
-              <option value="roaming">Roaming / unattended</option>
-              <option value="other">Other concern</option>
-            </select>
-
-            <label for="description">Description <span class="required">*</span></label>
-            <textarea
-              id="description" name="description" [(ngModel)]="description"
-              [disabled]="isSubmitting" required minlength="10" maxlength="5000" rows="5"
-              placeholder="Describe the animal's condition, appearance, and any immediate concerns."
-            ></textarea>
-            <p class="hint">At least 10 characters · {{ description.length }}/5000</p>
-          </section>
-
-          <section class="form-card">
-            <h2>Location and date</h2>
-            <label for="incident-date">Date observed <span class="required">*</span></label>
-            <input id="incident-date" name="incident_date" type="date" [(ngModel)]="incidentDate" [max]="today" required [disabled]="isSubmitting" />
-
-            <label for="location-address">Location / landmark <span class="required">*</span></label>
-            <textarea id="location-address" name="location_address" [(ngModel)]="locationAddress"
-              required maxlength="255" rows="3" [disabled]="isSubmitting"
-              placeholder="Barangay, street and nearest landmark"
-            ></textarea>
-            <p class="hint">The address is required even when you select a GPS location.</p>
-
-            <p class="hint">Select where the stray animal was actually observed, not necessarily your current location.</p>
-            <div class="location-buttons">
-              <ion-button type="button" fill="outline" [disabled]="gettingLocation || isSubmitting" (click)="useCurrentLocation()">
-                <ion-spinner *ngIf="gettingLocation" name="crescent"></ion-spinner>
-                {{ gettingLocation ? 'Getting location...' : 'Use My GPS Location' }}
-              </ion-button>
-              <ion-button type="button" fill="outline" [disabled]="isSubmitting" (click)="toggleMap()">
-                {{ showMap ? 'Hide Map' : 'Choose on Map' }}
-              </ion-button>
-            </div>
-            <p *ngIf="locationError" class="error-text" role="alert">{{ locationError }}</p>
-            <p *ngIf="locationMessage" class="success-text" role="status">{{ locationMessage }}</p>
-
-            <div *ngIf="showMap" class="map-card">
-              <p class="hint">Tap to place a pin; drag it to adjust the location.</p>
-              <div #locationMap class="location-map" aria-label="Map to select the location of the stray animal"></div>
-              <p class="hint">Map tiles require an internet connection.</p>
-            </div>
-
-            <div *ngIf="latitude !== null && longitude !== null" class="coordinates">
-              <strong>Location selected</strong>
-              <p>Latitude: {{ latitude | number:'1.6-7' }}</p>
-              <p>Longitude: {{ longitude | number:'1.6-7' }}</p>
-              <button type="button" class="text-button" [disabled]="isSubmitting" (click)="clearLocation()">Clear Pin</button>
-            </div>
-          </section>
-
-          <section class="form-card">
-            <h2>Animal photos <span class="optional">(optional)</span></h2>
-            <p class="hint">Add up to {{ maxPhotos }} clear photos. Only take photos when it is safe.</p>
-
-            <div class="photo-actions">
-              <label class="upload-label" for="stray-photos">
-                {{ selectedPhotos.length ? 'Add More Photos' : 'Choose Photos from Gallery' }}
-                <input id="stray-photos" type="file" multiple accept="image/jpeg,image/png,image/webp"
-                  [disabled]="isSubmitting || cameraOpening || selectedPhotos.length >= maxPhotos"
-                  (change)="onPhotosSelected($event)" />
-              </label>
-              <ion-button type="button" fill="outline" [disabled]="isSubmitting || cameraOpening || selectedPhotos.length >= maxPhotos" (click)="takePhoto()">
-                {{ cameraOpening ? 'Opening Camera...' : 'Take Photo' }}
-              </ion-button>
-            </div>
-            <p class="hint">JPG, PNG or WebP · Maximum 5 MB each · {{ selectedPhotos.length }}/{{ maxPhotos }} selected</p>
-            <p *ngIf="photoMessage" class="error-text" role="alert">{{ photoMessage }}</p>
-
-            <div *ngIf="selectedPhotos.length" class="photo-grid">
-              <div *ngFor="let photo of selectedPhotos; let i = index" class="photo-tile">
-                <img [src]="photo.previewUrl" [alt]="'Selected stray animal photo ' + (i + 1)" />
-                <button type="button" [disabled]="isSubmitting" (click)="removePhoto(i)" aria-label="Remove selected photo">×</button>
-              </div>
-            </div>
-          </section>
-
-          <p class="disclaimer">Do not approach or handle an injured or aggressive animal. Contact local emergency services if there is an immediate threat to people.</p>
-          <p *ngIf="submitMessage" class="error-text" role="alert">{{ submitMessage }}</p>
-          <ion-button type="submit" expand="block" [disabled]="isSubmitting || strayForm.invalid || !description.trim() || !locationAddress.trim()">
-            Review Report
-          </ion-button>
-        </form>
-
-        <section *ngIf="showPreview && !submissionComplete" class="preview-card">
-          <h2>Review your report</h2>
-          <p><strong>Animal:</strong> {{ animalType === 'dog' ? 'Dog' : 'Cat' }}</p>
-          <p><strong>Reason:</strong> {{ reasonLabel }}</p>
-          <p><strong>Date:</strong> {{ incidentDate }}</p>
-          <p><strong>Location:</strong> {{ locationAddress }}</p>
-          <p><strong>GPS:</strong> {{ latitude !== null ? 'Pin selected' : 'Not provided' }}</p>
-          <p><strong>Description:</strong> {{ description }}</p>
-          <p><strong>Photos:</strong> {{ selectedPhotos.length }}</p>
-          <p class="hint">The report is created first, then the photos are uploaded individually. If an upload fails, the report remains saved.</p>
-          <p *ngIf="submitMessage" class="error-text" role="alert">{{ submitMessage }}</p>
-          <ion-button type="button" expand="block" [disabled]="isSubmitting" (click)="submitReport()">
-            <ion-spinner *ngIf="isSubmitting" name="crescent"></ion-spinner>
-            {{ isSubmitting ? 'Submitting...' : 'Submit Report' }}
-          </ion-button>
-        </section>
-      </main>
-    </ion-content>
-  `,
-  styles: [`
-    :host { --ion-color-primary: #247b52; --ion-color-primary-contrast: #fff; }
-    ion-toolbar { --background: #fff; --color: #183f2d; }
-    ion-back-button { --color: #247b52; }
-    ion-title { font-size: 17px; font-weight: 700; }
-    ion-content { --background: #f5f8f5; }
-    .page-container { width: min(100%, 740px); margin: 0 auto; padding: 22px 16px 48px; }
-    .intro { margin-bottom: 20px; }
-    .eyebrow { color: #247b52; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; }
-    h1 { color: #193a29; font-size: clamp(24px, 5vw, 31px); margin: 8px 0; }
-    .intro p { color: #607268; font-size: 14px; line-height: 1.6; }
-    .report-form { display: grid; gap: 16px; }
-    .form-card,.preview-card,.success-card { background: #fff; border: 1px solid #e2eae3; border-radius: 18px; padding: 20px; box-shadow: 0 4px 18px rgba(23,69,45,.04); }
-    h2 { font-size: 18px; color: #193a29; margin: 0 0 18px; }
-    label:not(.upload-label) { display: block; font-weight: 700; font-size: 13px; color: #344d3e; margin: 15px 0 7px; }
-    input:not([type='file']), select, textarea { display: block; width: 100%; padding: 13px 12px; border-radius: 11px; border: 1px solid #ccdad0; background: #fff; color: #233e2d; font: inherit; font-size: 14px; outline: none; box-sizing: border-box; }
-    textarea { resize: vertical; min-height: 85px; line-height: 1.55; }
-    input:focus,select:focus,textarea:focus { border-color: #247b52; box-shadow: 0 0 0 3px rgba(36,123,82,.12); }
-    .required { color: #b93131; } .optional { color: #839288; font-size: 12px; font-weight: 500; }
-    .hint { margin: 7px 0 12px; font-size: 12px; line-height: 1.55; color: #728277; }
-    .location-buttons,.photo-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    ion-button { --border-radius: 11px; min-height: 44px; text-transform: none; font-weight: 700; }
-    ion-spinner { width: 17px; height: 17px; margin-right: 8px; vertical-align: middle; }
-    .map-card { margin-top: 14px; border: 1px solid #dfeae0; padding: 12px; border-radius: 14px; }
-    .location-map { width: 100%; height: 310px; border-radius: 10px; background: #eef2ec; position: relative; z-index: 0; }
-    .coordinates { border-radius: 12px; padding: 12px; background: #eaf6ed; margin-top: 12px; font-size: 12px; color: #25603e; }
-    .coordinates p { margin: 5px 0; } .text-button { padding: 8px 0; border: 0; background: transparent; color: #a13d33; cursor: pointer; font-weight: 700; }
-    .upload-label { display: inline-flex; padding: 12px 14px; border-radius: 11px; background: #e9f5ed; color: #247b52; font-size: 13px; font-weight: 750; cursor: pointer; position: relative; overflow: hidden; }
-    .upload-label input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(98px, 1fr)); gap: 10px; margin-top: 15px; }
-    .photo-tile { position: relative; background: #f0f4ef; border-radius: 12px; overflow: hidden; aspect-ratio: 1; }
-    .photo-tile img { width: 100%; height: 100%; object-fit: cover; }
-    .photo-tile button { position: absolute; top: 4px; right: 4px; background: rgba(30,30,30,.83); color: white; border: 0; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 22px; }
-    .error-text { color: #a22c24; font-size: 13px; line-height: 1.5; margin: 10px 0; overflow-wrap: anywhere; }
-    .success-text { color: #227d4b; font-size: 13px; line-height: 1.5; }
-    .notice { background: #fff8e9; border-radius: 9px; padding: 10px; color: #805f25; font-size: 12px; }
-    .disclaimer { color: #607268; font-size: 12px; line-height: 1.65; }
-    .preview-card { margin-top: 20px; overflow-wrap: anywhere; }
-    .preview-card p { color: #4c6253; font-size: 13px; line-height: 1.6; white-space: pre-wrap; }
-    .success-card { text-align: center; padding: 26px 20px; }
-    .success-card p { font-size: 14px; color: #597160; }
-    .success-card .error-text { color: #a22c24; }
-    .success-icon { display: grid; place-items: center; margin: 0 auto 12px; width: 48px; height: 48px; background: #e3f5e8; color: #247b52; border-radius: 50%; font-size: 27px; font-weight: 800; }
-    .status-text { color: #247b52 !important; font-weight: 700; }
-    .upload-summary { padding: 14px; margin: 16px 0; background: #f7faf7; border-radius: 12px; }
-    @media(min-width:620px) { .page-container { padding: 32px 24px 56px; } }
-  `],
+  templateUrl: './report-stray.page.html',
+  styleUrls: ['./report-stray.page.scss'],
 })
 export class ReportStrayPage implements OnDestroy {
   private readonly service = inject(StrayReportsService);
@@ -319,6 +103,10 @@ export class ReportStrayPage implements OnDestroy {
   allPhotosUploaded = false;
   photoUploadMessage = '';
   photoUploadUncertain = false;
+
+  // Keep both steps in this component so the resident's entered data and
+  // selected photos remain available while reviewing the report.
+  @ViewChild(IonContent) private pageContent?: IonContent;
 
   @ViewChild('locationMap')
   set locationMapElement(element: ElementRef<HTMLDivElement> | undefined) {
@@ -604,8 +392,28 @@ export class ReportStrayPage implements OnDestroy {
   reviewReport(): void {
     if (this.blocked) return;
     this.submitMessage = '';
-    this.showPreview = this.isReportValid();
-    if (!this.showPreview) this.submitMessage = 'Please complete all required fields before reviewing.';
+
+    // Keep the original validation requirements before entering Step 2.
+    if (!this.isReportValid()) {
+      this.showPreview = false;
+      this.submitMessage = 'Please complete all required fields before reviewing.';
+      return;
+    }
+
+    // Step 1 will be removed from the DOM in the HTML update. Dispose of
+    // Leaflet first so returning to edit can re-create the map safely.
+    if (this.map) this.destroyMap();
+    // Keep showMap and the selected coordinates so the map can reopen.
+    this.showPreview = true;
+    void this.pageContent?.scrollToTop(0);
+  }
+
+  backToEditReport(): void {
+    if (this.blocked) return;
+    // No form values, coordinates, or photo previews are reset here.
+    this.showPreview = false;
+    this.submitMessage = '';
+    void this.pageContent?.scrollToTop(0);
   }
 
   async submitReport(): Promise<void> {
@@ -699,7 +507,7 @@ export class ReportStrayPage implements OnDestroy {
   private strayUploadUrl(): string {
     // Matches the host selection currently used by StrayReportsService.
     // Update the native host here if you change that service's LAN IP.
-    const nativeHost = '192.168.100.23';
+    const nativeHost = '192.168.0.146';
     let host = nativeHost;
     if (!Capacitor.isNativePlatform()) {
       const current = window.location.hostname;
