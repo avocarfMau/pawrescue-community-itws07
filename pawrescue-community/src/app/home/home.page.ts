@@ -80,12 +80,9 @@ export class HomePage {
     }
 
     // STRAY ANIMAL ASSISTANCE
-    // To be implemented later.
     if (feature === 'stray') {
 
-      console.log(
-        'Stray Animal Assistance not implemented yet.'
-      );
+      this.router.navigateByUrl('/stray-assistance');
       return;
 
     }
